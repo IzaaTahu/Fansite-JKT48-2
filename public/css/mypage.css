@@ -1,0 +1,315 @@
+/* ==============================
+   MY PAGE — mypage.css
+   Pastel Pink & Lavender Theme
+   ============================== */
+
+/* ── HERO BANNER ─────────────────── */
+.mypage-hero {
+  position: relative;
+  padding: 52px 48px 44px;
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ede7f6 100%);
+  overflow: hidden;
+  border-bottom: 2px solid #f8bbd0;
+}
+
+.mypage-hero::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, #f8bbd0 0%, transparent 70%);
+  opacity: .5; pointer-events: none;
+}
+.mypage-hero::after {
+  content: '';
+  position: absolute; bottom: -40px; left: 40px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, #ede7f6 0%, transparent 70%);
+  opacity: .6; pointer-events: none;
+}
+
+.mypage-hero-content { position: relative; z-index: 1; }
+
+.mypage-hero-greet {
+  font-size: 14px; font-weight: 700;
+  color: #b06898; letter-spacing: .5px;
+  margin-bottom: 6px;
+}
+.mypage-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px; line-height: 1.2; color: #4a2040;
+  margin-bottom: 10px;
+}
+.mypage-hero-title em { font-style: italic; color: #e91e8c; }
+.mypage-hero-sub { font-size: 15px; color: #7b3f6e; }
+
+/* Floating deco */
+.mypage-hero-deco {
+  position: absolute; top: 20px; right: 48px;
+  display: flex; gap: 12px; font-size: 26px;
+  animation: heroDeco 3s ease-in-out infinite alternate;
+  z-index: 1;
+}
+@keyframes heroDeco {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ── FLASH ───────────────────────── */
+.mp-flash {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 48px; font-size: 14px; font-weight: 600;
+  gap: 12px;
+}
+.mp-flash button { background: none; border: none; font-size: 18px; cursor: pointer; opacity: .6; }
+.mp-flash button:hover { opacity: 1; }
+.mp-flash-success { background: #e8f5e9; color: #43a047; }
+.mp-flash-error   { background: #ffebee; color: #e53935; }
+
+/* ── LAYOUT ──────────────────────── */
+.mypage-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  padding: 36px 48px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ── CARD BASE ───────────────────── */
+.mp-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1.5px solid #f8bbd0;
+  box-shadow: 0 4px 20px rgba(233,30,140,.08);
+  margin-bottom: 20px;
+}
+.mp-card:last-child { margin-bottom: 0; }
+
+.mp-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 700;
+  color: #4a2040; margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid #fce4ec;
+}
+
+/* ── PROFILE CARD ────────────────── */
+.mp-profile-card { text-align: center; }
+
+.mp-profile-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, #f48fb1, #ce93d8);
+  color: white; font-size: 32px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 6px 20px rgba(233,30,140,.25);
+  border: 3px solid #f8bbd0;
+}
+
+.mp-profile-name {
+  font-size: 18px; font-weight: 800; color: #4a2040; margin-bottom: 4px;
+}
+.mp-profile-email {
+  font-size: 13px; color: #b06898; margin-bottom: 10px; word-break: break-all;
+}
+.mp-profile-badge {
+  display: inline-block;
+  background: #fce4ec; color: #e91e8c;
+  font-size: 12px; font-weight: 700;
+  padding: 4px 14px; border-radius: 20px;
+}
+
+/* ── FORM ────────────────────────── */
+.mp-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.mp-form-group label { font-size: 12px; font-weight: 700; color: #7b3f6e; }
+.mp-form-group input {
+  padding: 9px 13px;
+  border: 1.5px solid #f8bbd0; border-radius: 10px;
+  font-size: 14px; font-family: 'Nunito', sans-serif; color: #4a2040;
+  outline: none; transition: border .2s, box-shadow .2s;
+}
+.mp-form-group input:focus {
+  border-color: #e91e8c;
+  box-shadow: 0 0 0 3px rgba(233,30,140,.12);
+}
+
+/* ── BUTTONS ─────────────────────── */
+.mp-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 20px;
+  font-size: 13px; font-weight: 700; font-family: 'Nunito', sans-serif;
+  cursor: pointer; border: none; text-decoration: none;
+  transition: transform .15s, background .2s;
+}
+.mp-btn:hover { transform: translateY(-1px); }
+
+.mp-btn-primary  { background: #e91e8c; color: white; box-shadow: 0 3px 12px rgba(233,30,140,.25); }
+.mp-btn-primary:hover { background: #c2185b; }
+
+.mp-btn-ghost {
+  background: none; color: #b06898;
+  border: 1.5px solid #f8bbd0;
+}
+.mp-btn-ghost:hover { background: #ffebee; color: #e53935; border-color: #e53935; }
+
+/* ── INFO ROWS ───────────────────── */
+.mp-info-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid #fce4ec; font-size: 13px;
+}
+.mp-info-row:last-child { border-bottom: none; padding-bottom: 0; }
+.mp-info-label { color: #b06898; font-weight: 600; }
+.mp-info-val   { color: #4a2040; font-weight: 700; }
+.mp-role-admin { color: #e91e8c; }
+.mp-role-user  { color: #7b3f6e; }
+
+/* ── OSHI SHOWCASE ───────────────── */
+.mp-oshi-showcase { margin-bottom: 20px; }
+
+.mp-oshi-active {
+  display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;
+}
+
+.mp-oshi-img-wrap {
+  position: relative; flex-shrink: 0;
+  width: 120px;
+}
+.mp-oshi-img-wrap img {
+  width: 120px; height: 160px;
+  object-fit: cover; border-radius: 16px;
+  border: 3px solid #f8bbd0;
+  box-shadow: 0 8px 24px rgba(233,30,140,.2);
+  display: block;
+}
+.mp-oshi-placeholder {
+  width: 120px; height: 160px; border-radius: 16px;
+  background: #fce4ec; display: flex; align-items: center; justify-content: center;
+  font-size: 40px; border: 3px solid #f8bbd0;
+}
+.mp-oshi-badge-gen {
+  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  background: rgba(233,30,140,.85); color: white;
+  font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 10px;
+  white-space: nowrap;
+}
+
+.mp-oshi-detail { flex: 1; }
+.mp-oshi-label  { font-size: 11px; font-weight: 700; color: #b06898; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.mp-oshi-name   { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #4a2040; margin-bottom: 6px; }
+.mp-oshi-asal   { font-size: 13px; color: #7b3f6e; margin-bottom: 8px; }
+.mp-oshi-gen-tag {
+  display: inline-block;
+  background: #fce4ec; color: #e91e8c;
+  font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 20px;
+}
+
+/* Empty oshi state */
+.mp-oshi-empty {
+  text-align: center; padding: 28px 20px; color: #b06898;
+}
+.mp-oshi-empty-icon { font-size: 36px; margin-bottom: 10px; }
+.mp-oshi-empty p    { font-size: 14px; line-height: 1.7; }
+
+/* ── SEARCH BAR ──────────────────── */
+.mp-search-wrap { margin-bottom: 20px; }
+.mp-search-wrap input {
+  width: 100%; padding: 10px 16px;
+  border: 1.5px solid #f8bbd0; border-radius: 30px;
+  font-size: 14px; font-family: 'Nunito', sans-serif; color: #4a2040;
+  outline: none; transition: border .2s, box-shadow .2s;
+  background: #fdf6fb;
+}
+.mp-search-wrap input:focus {
+  border-color: #e91e8c;
+  box-shadow: 0 0 0 3px rgba(233,30,140,.1);
+}
+
+/* ── MEMBER GRID ─────────────────── */
+.mp-member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.mp-member-item {
+  background: #fdf6fb;
+  border: 1.5px solid #f8bbd0;
+  border-radius: 16px; padding: 14px;
+  text-align: center;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  position: relative;
+}
+.mp-member-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(233,30,140,.14);
+  border-color: #e91e8c;
+}
+.mp-member-item.is-oshi {
+  background: #fff0f8;
+  border-color: #e91e8c;
+  box-shadow: 0 0 0 3px rgba(233,30,140,.15);
+}
+
+.mp-member-photo { position: relative; margin-bottom: 10px; }
+.mp-member-photo img {
+  width: 80px; height: 100px;
+  object-fit: cover; border-radius: 12px;
+  border: 2px solid #f8bbd0;
+  display: block; margin: 0 auto;
+}
+.mp-photo-placeholder {
+  width: 80px; height: 100px; border-radius: 12px;
+  background: #fce4ec; display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto;
+  border: 2px solid #f8bbd0;
+}
+.mp-oshi-crown {
+  position: absolute; top: -8px; right: calc(50% - 48px);
+  font-size: 18px; animation: crownBounce 1s ease-in-out infinite alternate;
+}
+@keyframes crownBounce {
+  0%   { transform: rotate(-10deg) translateY(0); }
+  100% { transform: rotate(10deg)  translateY(-4px); }
+}
+
+.mp-member-name { font-size: 13px; font-weight: 700; color: #4a2040; margin-bottom: 3px; line-height: 1.3; }
+.mp-member-gen  { font-size: 11px; color: #b06898; font-weight: 600; margin-bottom: 10px; }
+
+.mp-btn-choose {
+  background: #e91e8c; color: white;
+  border: none; border-radius: 16px;
+  padding: 6px 14px; font-size: 12px; font-weight: 700;
+  font-family: 'Nunito', sans-serif; cursor: pointer;
+  width: 100%; transition: background .2s, transform .15s;
+}
+.mp-btn-choose:hover { background: #c2185b; transform: scale(1.03); }
+
+.mp-oshi-active-tag {
+  display: block; width: 100%;
+  background: #fce4ec; color: #e91e8c;
+  border-radius: 16px; padding: 6px 14px;
+  font-size: 12px; font-weight: 700; text-align: center;
+}
+
+/* ── EMPTY STATE ─────────────────── */
+.mp-empty {
+  text-align: center; padding: 32px; color: #b06898; font-size: 14px;
+}
+
+/* ── RESPONSIVE ──────────────────── */
+@media (max-width: 1024px) {
+  .mypage-layout { grid-template-columns: 1fr; padding: 28px 32px; }
+  .mp-sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .mp-sidebar .mp-card { margin-bottom: 0; }
+}
+@media (max-width: 768px) {
+  .mypage-hero { padding: 36px 20px 32px; }
+  .mypage-hero-title { font-size: 28px; }
+  .mypage-hero-deco { display: none; }
+  .mypage-layout { padding: 20px 16px; gap: 16px; }
+  .mp-sidebar { grid-template-columns: 1fr; }
+  .mp-member-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .mp-flash { padding: 12px 20px; }
+}

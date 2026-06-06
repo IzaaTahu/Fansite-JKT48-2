@@ -1,0 +1,385 @@
+/* ==============================
+   JADWAL PAGE — jadwal.css
+   Pastel Pink & Lavender Theme
+   ============================== */
+
+/* ── HERO ─────────────────────────── */
+.jadwal-hero {
+  padding: 56px 48px 48px;
+  background: linear-gradient(135deg, #fce4ec 0%, #fdf1f8 45%, #ede7f6 100%);
+  position: relative; overflow: hidden;
+  border-bottom: 2px solid #f8bbd0;
+}
+.jadwal-hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, #f8bbd0 0%, transparent 70%);
+  opacity: .5; pointer-events: none;
+}
+.jadwal-hero-content { position: relative; z-index: 1; }
+.jadwal-hero-content .hero-badge {
+  display: inline-block; background: #f8bbd0; color: #4a2040;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+}
+.jadwal-hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px; line-height: 1.2; color: #4a2040; margin-bottom: 10px;
+}
+.jadwal-hero-content h1 em { font-style: italic; color: #e91e8c; }
+.jadwal-hero-content p { font-size: 15px; color: #7b3f6e; }
+.jadwal-hero-deco {
+  position: absolute; top: 24px; right: 48px;
+  font-size: 28px; letter-spacing: 8px;
+  animation: heroDeco 3s ease-in-out infinite alternate;
+}
+@keyframes heroDeco {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ── CONTROLS (filter tipe) ──────── */
+.jadwal-controls {
+  padding: 20px 48px;
+  background: #fff;
+  border-bottom: 1.5px solid #f8bbd0;
+  overflow-x: auto;
+}
+.filter-pills {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.filter-pill {
+  padding: 6px 16px; border-radius: 20px;
+  border: 1.5px solid #f8bbd0; background: white;
+  font-size: 13px; font-weight: 700; font-family: 'Nunito', sans-serif;
+  color: #7b3f6e; cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.filter-pill:hover  { background: #f8bbd0; color: #4a2040; }
+.filter-pill.active { background: #e91e8c; color: white; border-color: #e91e8c; }
+
+/* ── SECTION ─────────────────────── */
+.jadwal-section {
+  padding: 40px 48px 60px;
+  background: #fdf6fb;
+  min-height: 400px;
+  display: flex; flex-direction: column; gap: 40px;
+}
+
+/* ── MONTH GROUP ─────────────────── */
+.jadwal-month-group {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.month-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 2px solid #f8bbd0;
+}
+.month-header.past { opacity: .6; }
+
+.month-date-block {
+  display: flex; align-items: baseline; gap: 8px;
+}
+.month-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700; color: #4a2040;
+}
+.month-year {
+  font-size: 14px; font-weight: 600; color: #b06898;
+}
+.month-past-badge {
+  background: #f5f5f5; color: #9e9e9e;
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+}
+
+/* ── JADWAL LIST ─────────────────── */
+.jadwal-list {
+  display: flex; flex-direction: column;
+  border-left: 2px solid #f8bbd0;
+  margin-left: 24px;
+  gap: 0;
+}
+
+/* ── JADWAL ROW ──────────────────── */
+.jadwal-row {
+  display: flex; align-items: center; gap: 0;
+  padding: 0 0 0 0;
+  cursor: pointer;
+  position: relative;
+  transition: background .15s;
+}
+.jadwal-row:last-child { border-bottom: none; }
+
+/* Tanggal */
+.jrow-date {
+  flex-shrink: 0;
+  width: 52px; text-align: center;
+  padding: 16px 0;
+  position: relative; left: -27px; /* keluar dari border-left */
+  background: #fdf6fb; /* sama dengan bg section */
+}
+.jrow-day {
+  font-size: 26px; font-weight: 800; color: #e91e8c; line-height: 1;
+}
+.jrow-day-past { color: #bdbdbd !important; }
+.jrow-dow {
+  font-size: 11px; font-weight: 700; color: #b06898; text-transform: uppercase;
+}
+
+/* Dot di garis timeline */
+.jrow-line {
+  flex-shrink: 0; width: 24px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; left: -15px;
+  align-self: stretch;
+  padding: 16px 0;
+}
+.jrow-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px currentColor;
+}
+.dot-active { background: #e91e8c; color: #e91e8c; }
+.dot-past   { background: #bdbdbd; color: #bdbdbd; }
+
+/* Body info */
+.jrow-body {
+  flex: 1; padding: 14px 12px;
+  min-width: 0;
+  border-bottom: 1px solid #fce4ec;
+}
+.jadwal-row:last-child .jrow-body { border-bottom: none; }
+
+.jrow-top {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px; flex-wrap: wrap;
+}
+
+/* Tipe badge */
+.jrow-tipe-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+}
+.tipe-pink  { background: #fce4ec; color: #e91e8c; }
+.tipe-lav   { background: #ede7f6; color: #7b1fa2; }
+.tipe-mint  { background: #e8f5e9; color: #2e7d32; }
+.tipe-peach { background: #fff3e0; color: #e65100; }
+.tipe-rose  { background: #fce4ec; color: #c2185b; }
+.tipe-gray  { background: #f5f5f5; color: #616161; }
+
+.jrow-upcoming {
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+  background: #e8f5e9; color: #2e7d32;
+}
+.jrow-selesai {
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+  background: #f5f5f5; color: #9e9e9e;
+}
+
+.jrow-nama {
+  font-size: 15px; font-weight: 700; color: #4a2040;
+  margin-bottom: 4px; line-height: 1.3;
+}
+.jrow-meta {
+  font-size: 12px; color: #b06898; font-weight: 600;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.jrow-sep { color: #f8bbd0; }
+
+/* Past row */
+.jadwal-row.is-past .jrow-nama { color: #9e9e9e; }
+.jadwal-row.is-past .jrow-day  { color: #bdbdbd; }
+.jadwal-row.is-past .jrow-meta { color: #c8c8c8; }
+
+/* Arrow */
+.jrow-arrow {
+  flex-shrink: 0; padding: 0 14px; font-size: 16px;
+  color: #f8bbd0; transition: color .2s, transform .2s;
+}
+.jadwal-row:hover .jrow-arrow { color: #e91e8c; transform: translateX(4px); }
+.jadwal-row:hover .jrow-body  { background: #fff5f9; }
+
+/* ── EMPTY STATE ─────────────────── */
+.jadwal-empty, .jadwal-no-result {
+  text-align: center; padding: 60px 20px; color: #b06898;
+}
+.jadwal-empty-icon { font-size: 48px; margin-bottom: 14px; }
+.jadwal-empty h3, .jadwal-no-result h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: #4a2040; margin-bottom: 8px;
+}
+.jadwal-empty p, .jadwal-no-result p { font-size: 14px; line-height: 1.7; }
+
+/* ── MODAL BACKDROP ──────────────── */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(74,32,64,.55); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+/* ── JADWAL MODAL ────────────────── */
+.jadwal-modal {
+  background: white; border-radius: 24px;
+  width: 100%; max-width: 720px;
+  max-height: 88vh;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(74,32,64,.3);
+  border: 2px solid #f8bbd0;
+  transform: translateY(20px) scale(.97);
+  transition: transform .25s ease;
+  display: flex; /* side-by-side */
+  overflow: hidden;
+}
+.modal-backdrop.open .jadwal-modal { transform: translateY(0) scale(1); }
+
+/* Close btn — pojok kanan atas modal */
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,.92); border: none; cursor: pointer;
+  font-size: 18px; color: #7b3f6e;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, color .2s; z-index: 20;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.modal-close:hover { background: #e91e8c; color: white; }
+
+/* ── FOTO SIDE (kiri) ── */
+.jmodal-foto-wrap {
+  width: 300px; flex-shrink: 0;
+  position: relative; overflow: hidden;
+  border-radius: 22px 0 0 22px;
+  background: #1a0a14;
+  display: flex; align-items: stretch;
+}
+.jmodal-foto {
+  width: 100%; height: 100%;
+  object-fit: cover; /* cover karena kolom ini fixed width, foto portrait akan terisi bagus */
+  display: block;
+  min-height: 420px;
+}
+/* Kalau tidak ada foto, sembunyikan kolom kiri */
+.jmodal-foto-wrap.no-foto { display: none; }
+
+.jmodal-foto-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(74,32,64,.7) 100%
+  );
+  pointer-events: none;
+}
+
+/* Tipe badge di atas foto (pojok bawah kiri) */
+.jmodal-tipe-over {
+  position: absolute; bottom: 16px; left: 14px; right: 14px;
+  background: rgba(233,30,140,.88); color: white;
+  font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px;
+  backdrop-filter: blur(4px); text-align: center;
+}
+
+/* ── INFO SIDE (kanan) ── */
+.jmodal-info-side {
+  flex: 1; overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.jmodal-info-side::-webkit-scrollbar { width: 4px; }
+.jmodal-info-side::-webkit-scrollbar-thumb { background: #f8bbd0; border-radius: 4px; }
+
+/* Header */
+.jmodal-header {
+  padding: 28px 24px 16px;
+  background: linear-gradient(135deg, #fce4ec, #ede7f6);
+  flex-shrink: 0;
+}
+/* Kalau tidak ada foto, header pake border-radius penuh */
+.jadwal-modal.no-foto .jmodal-header {
+  border-radius: 22px 22px 0 0;
+}
+
+.jmodal-tipe-badge {
+  display: inline-block;
+  background: rgba(233,30,140,.12); color: #e91e8c;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+}
+.jmodal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700; color: #4a2040; line-height: 1.3;
+}
+
+.jmodal-divider {
+  height: 2px; flex-shrink: 0;
+  background: linear-gradient(90deg, #f8bbd0, #ede7f6, transparent);
+}
+
+/* Detail grid */
+.jmodal-details {
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding: 16px 24px;
+  flex-shrink: 0;
+}
+.jdetail-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid #fce4ec;
+}
+.jdetail-item:nth-last-child(-n+2) { border-bottom: none; }
+.jdetail-icon  { font-size: 17px; flex-shrink: 0; margin-top: 2px; }
+.jdetail-label { font-size: 10px; font-weight: 700; color: #b06898; margin-bottom: 3px; text-transform: uppercase; letter-spacing: .5px; }
+.jdetail-val   { font-size: 13px; font-weight: 700; color: #4a2040; line-height: 1.4; }
+
+/* Deskripsi */
+.jmodal-desc-wrap {
+  margin: 0 24px 16px; flex: 1;
+  background: #fdf6fb; border-radius: 14px; padding: 14px;
+  border: 1.5px solid #f8bbd0;
+}
+.jmodal-desc-title {
+  font-size: 12px; font-weight: 700; color: #7b3f6e; margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: .5px;
+}
+.jmodal-desc {
+  font-size: 13px; color: #4a2040; line-height: 1.75; white-space: pre-line;
+}
+
+/* Footer */
+.jmodal-footer {
+  padding: 12px 24px 18px; flex-shrink: 0;
+  display: flex; justify-content: flex-end;
+  border-top: 1.5px solid #fce4ec;
+}
+.jmodal-close-btn {
+  background: #fce4ec; color: #e91e8c;
+  border: 1.5px solid #f8bbd0; border-radius: 20px;
+  padding: 8px 22px; font-size: 13px; font-weight: 700;
+  font-family: 'Nunito', sans-serif; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.jmodal-close-btn:hover { background: #e91e8c; color: white; border-color: #e91e8c; }
+
+/* ── RESPONSIVE ──────────────────── */
+@media (max-width: 768px) {
+  .jadwal-hero    { padding: 40px 20px 36px; }
+  .jadwal-hero-content h1 { font-size: 30px; }
+  .jadwal-hero-deco { display: none; }
+  .jadwal-controls { padding: 16px 20px; }
+  .jadwal-section  { padding: 24px 16px 40px; gap: 28px; }
+  .jadwal-list     { margin-left: 16px; }
+  .jrow-date       { width: 40px; left: -21px; }
+  .jrow-day        { font-size: 20px; }
+  .jrow-line       { left: -10px; }
+  /* Mobile modal: flip ke vertical, foto atas info bawah */
+  .jadwal-modal    { flex-direction: column; border-radius: 20px; max-height: 92vh; overflow-y: auto; }
+  .jmodal-foto-wrap { width: 100%; border-radius: 20px 20px 0 0; }
+  .jmodal-foto     { width: 100%; height: 220px; min-height: unset; object-fit: cover; }
+  .jmodal-info-side { overflow-y: visible; }
+  .jmodal-header   { padding: 16px 18px 12px; }
+  .jmodal-title    { font-size: 18px; }
+  .jmodal-details  { grid-template-columns: 1fr; padding: 12px 18px; }
+  .jdetail-item:nth-last-child(-n+2) { border-bottom: 1px solid #fce4ec; }
+  .jdetail-item:last-child { border-bottom: none; }
+  .jmodal-desc-wrap { margin: 0 18px 14px; }
+  .jmodal-footer   { padding: 10px 18px 16px; }
+}

@@ -1,0 +1,6 @@
+</main><!-- end .content -->
+</div><!-- end .main-wrap -->
+
+<script src="public/js/admin.js"></script>
+</body>
+</html>

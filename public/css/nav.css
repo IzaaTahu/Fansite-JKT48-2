@@ -1,0 +1,210 @@
+/* nav.css — Pastel Theme (Updated) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Playfair+Display:wght@700&display=swap');
+
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 40px;
+  position: sticky; top: 0; width: 100%; z-index: 1000;
+  background: rgba(252, 228, 236, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1.5px solid rgba(248, 187, 208, 0.7);
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  gap: 16px;
+}
+
+/* === LOGO === */
+.nav-logo {
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg,var(--pink-deep),var(--lavender-mid));
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:800; color:var(--white);
+  box-shadow:0 3px 10px var(--shadow-mid); flex-shrink:0;
+}
+
+.site-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--text-dark); white-space:nowrap; }
+
+/* === NAV LINKS === */
+.nav-center ul.nav-links {
+  display: flex; list-style: none; gap: 4px; margin: 0; padding: 0;
+}
+.nav-links a {
+  padding: 7px 16px; border-radius: 20px;
+  text-decoration: none; font-size: 13px; font-weight: 700;
+  color: #7b3f6e; letter-spacing: .3px;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: #f8bbd0; color: #4a2040; }
+.nav-links a.active { background: #e91e8c; color: white; }
+
+/* === RIGHT SIDE === */
+.nav-right {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+
+/* Oshi mini thumbnail */
+.oshi-mini {
+  width: 28px; height: 28px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f48fb1;
+  box-shadow: 0 2px 6px rgba(233,30,140,.2);
+}
+
+/* Profile pill (sudah login) */
+.profile-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: white;
+  border: 1.5px solid #f8bbd0;
+  padding: 4px 14px 4px 4px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.profile-pill:hover,
+.profile-pill.active {
+  border-color: #e91e8c;
+  box-shadow: 0 0 0 3px rgba(233,30,140,.1);
+}
+
+.pill-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #f48fb1, #ce93d8);
+  color: white; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.pill-info { display: flex; flex-direction: column; line-height: 1.2; }
+.pill-label { font-size: 10px; font-weight: 700; color: #e91e8c; text-transform: uppercase; letter-spacing: .5px; }
+.pill-name  { font-size: 13px; font-weight: 700; color: #4a2040; }
+
+/* Logout button */
+.nav-logout-btn {
+  font-size: 12px; font-weight: 700; color: #b06898;
+  text-decoration: none; padding: 6px 12px; border-radius: 16px;
+  border: 1.5px solid #f8bbd0;
+  transition: background .2s, color .2s;
+}
+.nav-logout-btn:hover { background: #ffebee; color: #e53935; border-color: #e53935; }
+
+/* Login / Daftar buttons (belum login) */
+.btn-login-nav {
+  background: #e91e8c; color: white;
+  padding: 8px 22px; border-radius: 20px;
+  text-decoration: none; font-weight: 700; font-size: 13px;
+  transition: background .2s, transform .15s;
+}
+.btn-login-nav:hover { background: #c2185b; transform: translateY(-1px); }
+
+.btn-register-nav {
+  background: white; color: #e91e8c;
+  padding: 7px 18px; border-radius: 20px;
+  text-decoration: none; font-weight: 700; font-size: 13px;
+  border: 1.5px solid #e91e8c;
+  transition: background .2s, color .2s;
+}
+.btn-register-nav:hover { background: #fce4ec; }
+
+/* === RESPONSIVE DESIGN === */
+
+/* Hide hamburger on desktop */
+.nav-toggle { display: none; }
+.hamburger { display: none; }
+.mobile-menu { display: none; }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 20px;
+    position: relative;
+  }
+
+  .nav-center { display: none; }
+  .nav-right { display: none; }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: auto;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background: #7b3f6e;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+  }
+
+  .nav-toggle:checked ~ .hamburger .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .nav-toggle:checked ~ .hamburger .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked ~ .hamburger .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .mobile-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(252, 228, 236, 0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid rgba(248, 187, 208, 0.7);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-toggle:checked ~ .mobile-menu {
+    transform: scaleY(1);
+  }
+
+  .nav-links-mobile {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links-mobile li {
+    border-bottom: 1px solid rgba(248, 187, 208, 0.3);
+  }
+
+  .nav-links-mobile a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: #7b3f6e;
+    transition: background 0.2s;
+  }
+
+  .nav-links-mobile a:hover,
+  .nav-links-mobile a.active {
+    background: #f8bbd0;
+    color: #4a2040;
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .navbar { padding: 10px 16px; }
+  .nav-center { display: none; }
+  .pill-info { display: none; }
+  .pill-avatar { width: 34px; height: 34px; }
+}

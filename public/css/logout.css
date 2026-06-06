@@ -1,0 +1,66 @@
+/* logout.css — Pastel Theme */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@1,500&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #fce4ec 0%, #ede7f6 100%);
+}
+
+.logout-wrapper { padding: 20px; width: 100%; max-width: 440px; }
+
+.logout-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 44px 36px;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(233,30,140,.18);
+  border: 1.5px solid #f8bbd0;
+}
+
+.icon-check {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: #fce4ec;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  color: #e91e8c;
+}
+
+.logout-card h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; color: #4a2040; margin-bottom: 12px;
+}
+.logout-card h1 span { color: #e91e8c; font-style: italic; }
+
+.logout-card p {
+  font-size: 14px; color: #7b3f6e; line-height: 1.7; margin-bottom: 8px;
+}
+
+.slogan { font-size: 13px !important; color: #b06898 !important; font-style: italic; }
+.slogan span { font-weight: 700; color: #e91e8c !important; }
+
+.btn-group {
+  display: flex; gap: 12px; justify-content: center;
+  margin-top: 28px; flex-wrap: wrap;
+}
+
+.btn-outline {
+  padding: 11px 28px; border-radius: 30px;
+  background: none; border: 2px solid #e91e8c;
+  color: #e91e8c; font-weight: 700; font-size: 14px;
+  font-family: 'Nunito', sans-serif; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn-outline:hover { background: #e91e8c; color: white; }
+
+.btn-solid {
+  padding: 11px 28px; border-radius: 30px;
+  background: #e91e8c; color: white;
+  font-weight: 700; font-size: 14px;
+  text-decoration: none; border: 2px solid #e91e8c;
+  transition: background .2s;
+}
+.btn-solid:hover { background: #c2185b; border-color: #c2185b; }

@@ -1,0 +1,557 @@
+/* ==============================
+   GALERI PAGE — galeri.css
+   Pastel Pink & Lavender Theme
+   ============================== */
+
+/* ── HERO ─────────────────────────── */
+.galeri-hero {
+  padding: 56px 48px 48px;
+  background: linear-gradient(135deg, #fce4ec 0%, #fdf1f8 45%, #ede7f6 100%);
+  position: relative; overflow: hidden;
+  border-bottom: 2px solid #f8bbd0;
+}
+.galeri-hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, #f8bbd0 0%, transparent 70%);
+  opacity: .5; pointer-events: none;
+}
+.galeri-hero-content { position: relative; z-index: 1; }
+.galeri-hero-content .hero-badge {
+  display: inline-block; background: #f8bbd0; color: #4a2040;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  white-space: nowrap; overflow: visible;
+}
+.galeri-hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px; line-height: 1.2; color: #4a2040; margin-bottom: 10px;
+}
+.galeri-hero-content h1 em { font-style: italic; color: #e91e8c; }
+.galeri-hero-content p { font-size: 15px; color: #7b3f6e; }
+.galeri-hero-deco {
+  position: absolute; top: 24px; right: 48px;
+  font-size: 28px; letter-spacing: 8px;
+  animation: heroDeco 3s ease-in-out infinite alternate;
+}
+@keyframes heroDeco { 0% { transform:translateY(0); } 100% { transform:translateY(-8px); } }
+
+/* ── BREADCRUMB ──────────────────── */
+.galeri-breadcrumb {
+  padding: 14px 48px;
+  background: white;
+  border-bottom: 1.5px solid #f8bbd0;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600;
+  flex-wrap: wrap;
+}
+.bc-link { color: #e91e8c; text-decoration: none; transition: color .2s; }
+.bc-link:hover { color: #c2185b; text-decoration: underline; }
+.bc-sep  { color: #f8bbd0; }
+.bc-active { color: #7b3f6e; }
+
+/* ── FLASH ───────────────────────── */
+.galeri-flash {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 48px; font-size: 14px; font-weight: 600; gap: 12px;
+}
+.galeri-flash button { background: none; border: none; font-size: 18px; cursor: pointer; opacity: .6; }
+.galeri-flash-success { background: #e8f5e9; color: #2e7d32; }
+.galeri-flash-error   { background: #ffebee; color: #c62828; }
+
+/* ── SECTION ─────────────────────── */
+.galeri-section {
+  padding: 36px 48px 60px;
+  background: #fdf6fb;
+  min-height: 400px;
+  display: flex; flex-direction: column; gap: 28px;
+}
+
+/* ── TIPE BADGE COLORS ───────────── */
+.tipe-pink  { background: #fce4ec; color: #e91e8c; }
+.tipe-lav   { background: #ede7f6; color: #7b1fa2; }
+.tipe-mint  { background: #e8f5e9; color: #2e7d32; }
+.tipe-peach { background: #fff3e0; color: #e65100; }
+.tipe-rose  { background: #fce4ec; color: #c2185b; }
+.tipe-gray  { background: #f5f5f5; color: #616161; }
+
+/* ── LEVEL 1: EVENT GRID ─────────── */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  background: white; border-radius: 20px; padding: 22px;
+  border: 1.5px solid #f8bbd0; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+  position: relative; overflow: hidden;
+}
+.event-card::before {
+  content: ''; position: absolute; top: -20px; right: -20px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: #fce4ec; opacity: .3; transition: opacity .25s;
+}
+.event-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(233,30,140,.15); border-color: #e91e8c; }
+.event-card:hover::before { opacity: .5; }
+
+.event-card-top { display: flex; align-items: center; justify-content: space-between; }
+.event-icon-wrap {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.event-tipe-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+}
+.event-card-body { flex: 1; }
+.event-card-name {
+  font-size: 16px; font-weight: 800; color: #4a2040;
+  line-height: 1.3; margin-bottom: 6px;
+}
+.event-card-date { font-size: 12px; color: #b06898; font-weight: 600; }
+.event-card-stats {
+  display: flex; gap: 12px;
+  font-size: 12px; color: #7b3f6e; font-weight: 600;
+  padding-top: 10px; border-top: 1px solid #fce4ec;
+}
+.event-card-arrow {
+  font-size: 13px; font-weight: 700; color: #e91e8c;
+  transition: gap .15s;
+}
+.event-card:hover .event-card-arrow { letter-spacing: .5px; }
+
+/* ── EMPTY STATE ─────────────────── */
+.galeri-empty { text-align: center; padding: 60px 20px; color: #b06898; }
+.galeri-empty-icon { font-size: 48px; margin-bottom: 14px; }
+.galeri-empty h3 { font-family:'Playfair Display',serif; font-size:22px; color:#4a2040; margin-bottom:8px; }
+.galeri-empty p  { font-size: 14px; line-height: 1.7; }
+
+/* ── LEVEL 2: UPLOAD PANEL ───────── */
+.upload-panel {
+  background: white; border-radius: 20px; padding: 20px 24px;
+  border: 1.5px solid #f8bbd0;
+  box-shadow: 0 4px 16px rgba(233,30,140,.08);
+}
+.upload-panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.upload-panel-title { font-size: 15px; font-weight: 800; color: #4a2040; margin-bottom: 3px; }
+.upload-panel-sub   { font-size: 13px; color: #7b3f6e; }
+.upload-toggle-btn {
+  background: #e91e8c; color: white;
+  border: none; border-radius: 20px;
+  padding: 8px 20px; font-size: 13px; font-weight: 700;
+  font-family: 'Nunito', sans-serif; cursor: pointer; white-space: nowrap;
+  transition: background .2s;
+}
+.upload-toggle-btn:hover { background: #c2185b; }
+
+.upload-form-wrap {
+  margin-top: 18px; padding-top: 18px;
+  border-top: 1.5px solid #fce4ec;
+}
+.upload-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+.upload-field { display: flex; flex-direction: column; gap: 6px; }
+.upload-field.full { grid-column: 1 / -1; }
+.upload-field label { font-size: 12px; font-weight: 700; color: #7b3f6e; }
+.upload-field input[type=text],
+.upload-field select {
+  padding: 9px 13px; border: 1.5px solid #f8bbd0; border-radius: 10px;
+  font-size: 14px; font-family: 'Nunito', sans-serif; color: #4a2040;
+  outline: none; transition: border .2s, box-shadow .2s;
+}
+.upload-field input:focus,
+.upload-field select:focus {
+  border-color: #e91e8c; box-shadow: 0 0 0 3px rgba(233,30,140,.1);
+}
+.upload-hint { font-size: 11px; color: #b06898; margin-top: 2px; }
+.req { color: #e91e8c; }
+
+.upload-preview-wrap {
+  margin-bottom: 14px; border-radius: 12px; overflow: hidden;
+  border: 2px solid #f8bbd0; max-width: 360px;
+}
+.upload-preview-wrap img,
+.upload-preview-wrap video {
+  width: 100%; display: block; max-height: 240px; object-fit: contain;
+  background: #fdf6fb;
+}
+
+.upload-actions { display: flex; gap: 10px; }
+.btn-upload-submit {
+  background: #e91e8c; color: white;
+  border: none; border-radius: 20px;
+  padding: 10px 24px; font-size: 13px; font-weight: 700;
+  font-family: 'Nunito', sans-serif; cursor: pointer;
+  transition: background .2s; box-shadow: 0 3px 12px rgba(233,30,140,.25);
+}
+.btn-upload-submit:hover { background: #c2185b; }
+.btn-upload-cancel {
+  background: #fce4ec; color: #7b3f6e;
+  border: 1.5px solid #f8bbd0; border-radius: 20px;
+  padding: 10px 18px; font-size: 13px; font-weight: 700;
+  font-family: 'Nunito', sans-serif; cursor: pointer;
+  transition: background .2s;
+}
+.btn-upload-cancel:hover { background: #f8bbd0; }
+
+.upload-login-hint {
+  background: white; border: 1.5px solid #f8bbd0; border-radius: 14px;
+  padding: 14px 20px; font-size: 14px; color: #7b3f6e; font-weight: 600;
+}
+.upload-login-hint a { color: #e91e8c; font-weight: 700; text-decoration: none; }
+
+/* ── LEVEL 2: MEMBER GALERI GRID ─── */
+.galeri-subtitle {
+  font-size: 14px; font-weight: 700; color: #7b3f6e;
+}
+.member-galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+.member-galeri-card {
+  background: white; border-radius: 16px;
+  border: 1.5px solid #f8bbd0; text-decoration: none; color: inherit;
+  overflow: hidden; text-align: center;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.member-galeri-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(233,30,140,.15); border-color: #e91e8c; }
+.mgc-photo { position: relative; aspect-ratio: 3/4; overflow: hidden; background: #fce4ec; }
+.mgc-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+.member-galeri-card:hover .mgc-photo img { transform: scale(1.06); }
+.mgc-photo-ph { width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px; }
+.mgc-count {
+  position: absolute; bottom: 6px; right: 6px;
+  background: rgba(233,30,140,.85); color: white;
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+}
+.mgc-name { font-size: 13px; font-weight: 700; color: #4a2040; padding: 8px 8px 2px; }
+.mgc-gen  { font-size: 11px; color: #b06898; font-weight: 600; padding: 0 8px 10px; }
+
+/* ── LEVEL 3: FOTO LIST ──────────── */
+/* ══════════════════════════════════════════════
+   TAMBAHKAN CSS INI KE BAWAH galeri.css
+   (masonry grid + split modal foto)
+   ══════════════════════════════════════════════ */
+
+/* ── FOTO COUNT ──────────────────── */
+.foto-count {
+  font-size: 13px; color: #b06898; font-weight: 600;
+}
+
+/* ── MASONRY GRID ────────────────── */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.masonry-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fce4ec;
+  border: 1.5px solid #f8bbd0;
+  transition: transform .2s, box-shadow .2s;
+  aspect-ratio: 1 / 1; /* Ukuran foto sama: square */
+}
+.masonry-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 28px rgba(233,30,140,.22);
+  border-color: #e91e8c;
+  z-index: 1;
+}
+
+.masonry-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crop agar fit square */
+  display: block;
+}
+
+/* Video thumb */
+.masonry-video-thumb {
+  position: relative;
+  background: #1a0a14;
+  width: 100%;
+  height: 100%;
+}
+.masonry-video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* klik item, bukan kontrol video */
+}
+.masonry-video-play {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; color: white;
+  background: rgba(0,0,0,.3);
+  transition: background .2s;
+}
+.masonry-item:hover .masonry-video-play { background: rgba(233,30,140,.5); }
+
+/* Hover overlay */
+.masonry-hover {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(74,32,64,.8));
+  padding: 28px 12px 12px;
+  opacity: 1; /* Selalu tampilkan komentar dan uploader */
+  transition: opacity .2s;
+}
+.masonry-item:hover .masonry-hover { opacity: 1; }
+.masonry-caption {
+  font-size: 12px; color: white; font-weight: 600;
+  line-height: 1.4; margin-bottom: 6px;
+}
+.masonry-meta-row {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: rgba(255,255,255,.8); font-weight: 600;
+}
+
+/* ── FOTO MODAL BACKDROP ─────────── */
+.foto-modal-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,6,16,.88);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+.foto-modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+/* ── FOTO MODAL ──────────────────── */
+.foto-modal {
+  display: flex;
+  width: 100%; max-width: 1100px;
+  max-height: 92vh;
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.5);
+  border: 1.5px solid rgba(255,255,255,.08);
+  transform: scale(.96); transition: transform .25s ease;
+}
+.foto-modal-backdrop.open .foto-modal { transform: scale(1); }
+
+/* ── MEDIA SIDE (kiri) ───────────── */
+.fmodal-media-side {
+  flex: 1;
+  background: #0d0409;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+/* Close btn */
+.fmodal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 10;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: none; cursor: pointer;
+  font-size: 20px; color: white; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+  backdrop-filter: blur(4px);
+}
+.fmodal-close:hover { background: #e91e8c; }
+
+/* Prev/Next nav */
+.fmodal-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.15); border: none; cursor: pointer;
+  color: white; font-size: 28px;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; transition: background .2s; backdrop-filter: blur(4px);
+}
+.fmodal-nav:hover { background: #e91e8c; }
+.fmodal-prev { left: 12px; }
+.fmodal-next { right: 12px; }
+
+/* Media wrap — adapts to image ratio */
+.fmodal-media-wrap {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 52px; /* ruang untuk nav buttons */
+}
+.fmodal-img {
+  max-width: 100%; max-height: 88vh;
+  object-fit: contain;
+  border-radius: 4px; display: block;
+  /* portrait dan landscape sama-sama ikut ratio asli */
+}
+.fmodal-video {
+  max-width: 100%; max-height: 88vh;
+  border-radius: 4px; display: block;
+}
+
+/* Type badge */
+.fmodal-type-badge {
+  position: absolute; bottom: 14px; left: 14px;
+  font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 10px;
+}
+.badge-foto  { background: rgba(233,30,140,.85); color: white; }
+.badge-video { background: rgba(74,32,64,.85);   color: white; }
+
+/* ── INFO SIDE (kanan) ───────────── */
+.fmodal-info-side {
+  width: 340px; flex-shrink: 0;
+  background: white;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* Uploader row */
+.fmodal-uploader-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 18px 12px;
+  border-bottom: 1.5px solid #fce4ec;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.fmodal-avatar {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #f48fb1, #ce93d8);
+  color: white; font-weight: 800; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+}
+.fmodal-uploader-name { font-size: 14px; font-weight: 700; color: #4a2040; }
+.fmodal-upload-time   { font-size: 11px; color: #b06898; }
+.fmodal-hapus-wrap    { margin-left: auto; }
+.fmodal-hapus-btn {
+  font-size: 12px; font-weight: 700; color: #e53935;
+  text-decoration: none; padding: 4px 10px; border-radius: 10px;
+  background: #ffebee; transition: background .2s;
+  white-space: nowrap;
+}
+.fmodal-hapus-btn:hover { background: #e53935; color: white; }
+
+/* Caption */
+.fmodal-caption {
+  padding: 10px 18px;
+  font-size: 14px; color: #4a2040; line-height: 1.65;
+  border-bottom: 1.5px solid #fce4ec;
+  flex-shrink: 0;
+}
+
+/* Divider */
+.fmodal-divider {
+  height: 1.5px; background: #fce4ec; flex-shrink: 0;
+}
+
+/* Komentar */
+.fmodal-kom-title {
+  padding: 12px 18px 8px;
+  font-size: 13px; font-weight: 700; color: #7b3f6e;
+  flex-shrink: 0;
+}
+.fmodal-kom-list {
+  flex: 1; overflow-y: auto;
+  padding: 0 18px 12px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.fmodal-kom-list::-webkit-scrollbar { width: 3px; }
+.fmodal-kom-list::-webkit-scrollbar-thumb { background: #f8bbd0; border-radius: 3px; }
+
+.fmodal-no-kom {
+  font-size: 13px; color: #b06898; text-align: center;
+  padding: 20px 0; font-style: italic;
+}
+
+.fmodal-kom-item {
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.fmodal-kom-av {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #f48fb1, #ce93d8);
+  color: white; font-weight: 800; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.fmodal-kom-body { flex: 1; }
+.fmodal-kom-head {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 3px;
+}
+.fmodal-kom-name { font-size: 12px; font-weight: 700; color: #4a2040; }
+.fmodal-kom-time { font-size: 10px; color: #b06898; }
+.fmodal-kom-isi  { font-size: 13px; color: #4a2040; line-height: 1.55; }
+.kom-hapus {
+  margin-left: auto; font-size: 13px; color: #e53935;
+  cursor: pointer; text-decoration: none; font-weight: 700;
+}
+.kom-hapus:hover { opacity: .7; }
+
+/* Form komentar */
+.fmodal-kom-form {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 18px;
+  border-top: 1.5px solid #fce4ec;
+  flex-shrink: 0;
+}
+.fmodal-kom-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #f48fb1, #ce93d8);
+  color: white; font-weight: 800; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.fmodal-kom-input-wrap {
+  flex: 1; display: flex; gap: 6px;
+}
+.fmodal-kom-input-wrap input {
+  flex: 1; padding: 8px 12px;
+  border: 1.5px solid #f8bbd0; border-radius: 20px;
+  font-size: 12px; font-family: 'Nunito', sans-serif; color: #4a2040;
+  outline: none; transition: border .2s; background: #fdf6fb;
+}
+.fmodal-kom-input-wrap input:focus { border-color: #e91e8c; }
+.fmodal-kom-input-wrap button {
+  background: #e91e8c; color: white;
+  border: none; border-radius: 16px; padding: 8px 14px;
+  font-size: 12px; font-weight: 700; font-family: 'Nunito', sans-serif;
+  cursor: pointer; white-space: nowrap; transition: background .2s;
+}
+.fmodal-kom-input-wrap button:hover { background: #c2185b; }
+.fmodal-kom-login {
+  padding: 12px 18px; border-top: 1.5px solid #fce4ec;
+  font-size: 13px; color: #b06898; flex-shrink: 0;
+}
+.fmodal-kom-login a { color: #e91e8c; font-weight: 700; text-decoration: none; }
+
+/* ── RESPONSIVE ──────────────────── */
+@media (max-width: 900px) {
+  .foto-modal { flex-direction: column; max-height: 96vh; overflow-y: auto; }
+  .fmodal-media-side { min-height: 260px; max-height: 55vh; }
+  .fmodal-info-side  { width: 100%; max-height: 45vh; overflow-y: auto; }
+  .fmodal-kom-list   { max-height: 160px; }
+}
+
+@media (max-width: 600px) {
+  .masonry-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .masonry-item { /* margin-bottom tidak perlu untuk grid */ }
+  .fmodal-media-side { min-height: 220px; }
+}
+
+/* ── ADMIN PANEL ─────────────────── */
+/* note: admin panel pakai admin.css, ini hanya untuk tab galeri di sidebar */
+
+/* ── RESPONSIVE ──────────────────── */
+@media (max-width: 768px) {
+  .galeri-hero { padding: 40px 20px 36px; }
+  .galeri-hero-content h1 { font-size: 28px; }
+  .galeri-hero-deco { display: none; }
+  .galeri-breadcrumb { padding: 12px 16px; font-size: 12px; }
+  .galeri-flash { padding: 12px 16px; }
+  .galeri-section { padding: 20px 16px 40px; gap: 20px; }
+  .event-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+  .member-galeri-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+  .upload-grid { grid-template-columns: 1fr; }
+  .foto-img { max-height: 320px; }
+  .foto-video { max-height: 280px; }
+  .kom-input-row input { font-size: 12px; }
+}
