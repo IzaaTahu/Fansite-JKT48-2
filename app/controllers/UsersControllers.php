@@ -202,14 +202,18 @@ class UsersControllers {
     }
 
     public function logout() {
-        if (isset($_POST['confirm_logout'])) {
-            session_unset();
-            session_destroy();
-            header("Location: index.php");
-            exit;
-        }
-        include 'app/view/auth/logout.php';
+    // Ganti pengecekan dari name button menjadi pengecekan METHOD REQUEST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        session_start(); // Pastikan session aktif sebelum di-unset
+        session_unset();
+        session_destroy();
+        
+        header("Location: index.php?act=home"); 
+        exit;
     }
+    include 'app/view/auth/logout.php';
+    exit;
+}
 
     // ==========================================
     // ADMIN DASHBOARD
@@ -462,7 +466,8 @@ public function adminJadwalSync() {
     $this->requireAdmin();
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: index.php?act=admin-jadwal");
+        var_dump($result); die();
+        header("Location: index.php?act=admin-jadwal-preview&year={$year}&month={$month}");
         exit;
     }
 

@@ -1,0 +1,12 @@
+Options -Indexes
+
+RewriteEngine On
+# Ubah base-nya ke root hosting karena file kamu langsung di dalam htdocs
+RewriteBase /
+
+# Biarkan file/folder statis lewat langsung (gambar, css, js)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Semua request → index.php
+RewriteRule ^(.*)$ index.php [QSA,L]

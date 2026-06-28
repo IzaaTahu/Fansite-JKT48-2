@@ -1,66 +1,162 @@
-/* logout.css — Pastel Theme */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@1,500&display=swap');
+/* ==============================
+   LOGOUT PAGE — logout.css
+   Idol Energy × Pastel Elegance
+   ============================== */
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --pk-main:   #e91e8c;
+  --pk-deep:   #c2185b;
+  --pk-mid:    #f48fb1;
+  --pk-light:  #fce4ec;
+  --pk-pale:   #fff0f7;
+  --lav-main:  #9c27b0;
+  --lav-light: #ede7f6;
+  --text-dark: #3a1a30;
+  --text-mid:  #7b3f6e;
+  --text-light:#b06898;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Nunito', sans-serif;
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #fce4ec 0%, #ede7f6 100%);
+  background: linear-gradient(135deg, var(--pk-light) 0%, #fdf1f8 45%, var(--lav-light) 100%);
+  position: relative; overflow: hidden;
 }
 
-.logout-wrapper { padding: 20px; width: 100%; max-width: 440px; }
+/* Orbs */
+.logout-orb {
+  position: absolute; border-radius: 50%;
+  pointer-events: none; filter: blur(50px);
+}
+.orb-1 {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(233,30,140,.16), transparent 70%);
+  top: -100px; right: -80px;
+  animation: orbFloat 7s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(156,39,176,.12), transparent 70%);
+  bottom: -60px; left: -40px;
+  animation: orbFloat 9s ease-in-out infinite alternate-reverse;
+}
+@keyframes orbFloat {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(20px,-20px) scale(1.12); }
+}
 
+/* Card */
+.logout-wrapper { padding: 20px; width: 100%; max-width: 440px; position: relative; z-index: 1; }
 .logout-card {
   background: #fff;
   border-radius: 28px;
   padding: 44px 36px;
   text-align: center;
-  box-shadow: 0 16px 48px rgba(233,30,140,.18);
-  border: 1.5px solid #f8bbd0;
+  box-shadow: 0 20px 56px rgba(233,30,140,.18);
+  border: 1.5px solid var(--pk-mid);
+  animation: cardPop .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes cardPop {
+  from { opacity: 0; transform: translateY(20px) scale(.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.icon-check {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: #fce4ec;
+/* Icon */
+.icon-wrap {
+  width: 80px; height: 80px; margin: 0 auto 22px;
+  position: relative;
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px;
-  color: #e91e8c;
+}
+.icon-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: var(--pk-light);
+  animation: ringPulse 2s ease-in-out infinite;
+}
+@keyframes ringPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(233,30,140,.15); }
+  50%       { box-shadow: 0 0 0 14px rgba(233,30,140,0); }
+}
+.icon-emoji {
+  font-size: 36px; position: relative; z-index: 1;
+  animation: waveHand 1.2s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+@keyframes waveHand {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(18deg); }
+  75%       { transform: rotate(-10deg); }
 }
 
+/* Text */
 .logout-card h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 26px; color: #4a2040; margin-bottom: 12px;
+  font-size: 28px; color: var(--text-dark); margin-bottom: 12px;
+  line-height: 1.3;
 }
-.logout-card h1 span { color: #e91e8c; font-style: italic; }
-
+.logout-card h1 em { font-style: italic; color: var(--pk-main); }
 .logout-card p {
-  font-size: 14px; color: #7b3f6e; line-height: 1.7; margin-bottom: 8px;
+  font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 18px;
 }
 
-.slogan { font-size: 13px !important; color: #b06898 !important; font-style: italic; }
-.slogan span { font-weight: 700; color: #e91e8c !important; }
+/* Slogan */
+.slogan {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--pk-pale); border: 1.5px solid var(--pk-light);
+  border-radius: 20px; padding: 10px 18px;
+  font-size: 13px; color: var(--text-light); font-style: italic;
+  margin-bottom: 28px;
+}
+.slogan-icon {
+  font-size: 14px;
+  animation: heartBeat 1.6s ease-in-out infinite;
+}
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  15%       { transform: scale(1.3); }
+  30%       { transform: scale(1); }
+  45%       { transform: scale(1.2); }
+}
+.slogan strong { color: var(--pk-main); font-weight: 800; font-style: normal; }
 
+/* Buttons */
 .btn-group {
-  display: flex; gap: 12px; justify-content: center;
-  margin-top: 28px; flex-wrap: wrap;
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+}
+.btn-group form { display: contents; }
+
+.btn-solid {
+  padding: 12px 30px; border-radius: 30px;
+  background: var(--pk-main); color: white;
+  font-weight: 800; font-size: 14px;
+  text-decoration: none; border: 2px solid var(--pk-main);
+  box-shadow: 0 6px 18px rgba(233,30,140,.3);
+  transition: background .2s, transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+  display: inline-flex; align-items: center;
+}
+.btn-solid:hover {
+  background: var(--pk-deep); border-color: var(--pk-deep);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(233,30,140,.4);
 }
 
 .btn-outline {
-  padding: 11px 28px; border-radius: 30px;
-  background: none; border: 2px solid #e91e8c;
-  color: #e91e8c; font-weight: 700; font-size: 14px;
+  padding: 12px 30px; border-radius: 30px;
+  background: none; border: 2px solid var(--pk-light);
+  color: var(--text-light); font-weight: 700; font-size: 14px;
   font-family: 'Nunito', sans-serif; cursor: pointer;
-  transition: background .2s, color .2s;
+  transition: background .2s, color .2s, border-color .2s;
 }
-.btn-outline:hover { background: #e91e8c; color: white; }
+.btn-outline:hover {
+  background: #ffebee; color: #e53935; border-color: #e53935;
+}
 
-.btn-solid {
-  padding: 11px 28px; border-radius: 30px;
-  background: #e91e8c; color: white;
-  font-weight: 700; font-size: 14px;
-  text-decoration: none; border: 2px solid #e91e8c;
-  transition: background .2s;
+/* Responsive */
+@media (max-width: 480px) {
+  .logout-card { padding: 36px 24px; }
+  .logout-card h1 { font-size: 24px; }
+  .btn-group { flex-direction: column-reverse; }
+  .btn-solid, .btn-outline { width: 100%; justify-content: center; text-align: center; }
 }
-.btn-solid:hover { background: #c2185b; border-color: #c2185b; }

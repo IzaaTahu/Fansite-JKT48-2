@@ -58,6 +58,9 @@ switch ($act) {
     case 'admin-jadwal-update':   $controller->adminJadwalUpdate();    break;
     case 'admin-jadwal-delete':   $controller->adminJadwalDelete();    break;
 
+    case 'admin-jadwal-preview': $controller->adminJadwalPreview(); break;
+    case 'admin-jadwal-sync':    $controller->adminJadwalSync();    break;
+
     case 'admin-post':            $controller->adminPost();            break;
     case 'admin-post-create':     $controller->adminPostCreate();      break;
     case 'admin-post-store':      $controller->adminPostStore();       break;

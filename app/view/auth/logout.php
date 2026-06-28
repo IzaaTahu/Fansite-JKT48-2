@@ -5,19 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Keluar — JKT48 Fansite</title>
   <link rel="stylesheet" href="public/css/logout.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet"/>
 </head>
 <body>
+
+  <div class="logout-orb orb-1"></div>
+  <div class="logout-orb orb-2"></div>
+
   <div class="logout-wrapper">
     <div class="logout-card">
-      <div class="icon-check">
-        <svg viewBox="0 0 24 24" width="40" height="40">
-          <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-        </svg>
+
+      <div class="icon-wrap">
+        <div class="icon-ring"></div>
+        <div class="icon-emoji">👋</div>
       </div>
 
-      <h1>Yakin ingin <span>keluar?</span></h1>
+      <h1>Yakin ingin <em>keluar?</em></h1>
       <p>Jangan lupa kembali lagi untuk update terbaru JKT48 dan aktivitas seru lainnya!</p>
-      <p class="slogan">Sampai ketemu lagi! <span>— Tim JKT48 Fansite</span></p>
+
+      <div class="slogan">
+        <span class="slogan-icon">💗</span>
+        Sampai ketemu lagi! <strong>— Tim JKT48 Fansite</strong>
+      </div>
 
       <div class="btn-group">
         <form action="index.php?act=logout" method="POST">
@@ -28,5 +37,6 @@
       </div>
     </div>
   </div>
+<script src="public/js/logout.js"></script>
 </body>
 </html>

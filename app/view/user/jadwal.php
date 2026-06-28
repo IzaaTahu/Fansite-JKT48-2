@@ -1,3 +1,89 @@
+<?php
+/**
+ * Konstanta tipe acara — didefinisikan di sini (paling atas) supaya bisa
+ * dipakai dua kali: render filter pills (lebih awal di halaman) dan
+ * render badge tipe di tiap baris jadwal (lebih bawah, di dalam loop).
+ * Satu sumber kebenaran, bukan dua array kembar yang gampang out-of-sync.
+ *
+ * POIN 1: semua value $TIPE_ICON sekarang SVG, bukan emoji. Style-nya
+ * "kawaii duotone" — solid fill + layer opacity, bahasa visual yang sama
+ * dengan ikon di navbar (nav.php), bukan ikon stroke generik atau emoji OS.
+ */
+$BULAN_ID = [
+  '01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April',
+  '05'=>'Mei','06'=>'Juni','07'=>'Juli','08'=>'Agustus',
+  '09'=>'September','10'=>'Oktober','11'=>'November','12'=>'Desember'
+];
+
+$TIPE_ICON = [
+  'Theater Show' => '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3c2 1 3.5 3 3.5 6.5S5 19 3 21h4c2.5 0 4-3 4-8.5S9.5 5 7 3Z" opacity=".5"/><path d="M21 3c-2 1-3.5 3-3.5 6.5S19 19 21 21h-4c-2.5 0-4-3-4-8.5S14.5 5 17 3Z"/><rect x="9" y="20.4" width="6" height="1.6" rx=".8" opacity=".5"/></svg>',
+  'Off Air'      => '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M6.5 10.5a1 1 0 0 1 2 0 3.5 3.5 0 0 0 7 0 1 1 0 0 1 2 0 5.5 5.5 0 0 1-4.5 5.42V19h2.2a1 1 0 0 1 0 2H8.8a1 1 0 0 1 0-2H11v-3.08A5.5 5.5 0 0 1 6.5 10.5Z" opacity=".5"/></svg>',
+  'On Air'       => '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="13" rx="2"/><rect x="5.5" y="7.2" width="13" height="7.6" rx=".8" opacity=".4"/><rect x="10" y="18" width="4" height="2.2" rx=".6" opacity=".7"/><rect x="7" y="20.6" width="10" height="1.6" rx=".8" opacity=".7"/></svg>',
+  'Event'        => '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="10.5" width="16" height="9.5" rx="1.3"/><rect x="3.3" y="7.3" width="17.4" height="3.6" rx="1" opacity=".85"/><rect x="11" y="7.3" width="2" height="12.7" opacity=".4"/><path d="M12 7.3c-.7-2.8-3.6-3.8-3.6-1.6 0 1.6 1.8 1.6 3.6 1.6Z" opacity=".7"/><path d="M12 7.3c.7-2.8 3.6-3.8 3.6-1.6 0 1.6-1.8 1.6-3.6 1.6Z" opacity=".7"/></svg>',
+  'Meet & Greet' => '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="8.6" cy="8" r="3" opacity=".4"/><path d="M3.2 19c0-3.3 2.4-5.5 5.4-5.5S14 15.7 14 19" opacity=".4"/><circle cx="15.3" cy="8.6" r="3.4"/><path d="M8.7 19.5c0-3.6 2.9-6 6.6-6s6.6 2.4 6.6 6"/></svg>',
+  'Lainnya'      => '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v16.2c0 .8-.9 1.3-1.6.9L12 17.5l-5.4 3.6c-.7.4-1.6-.1-1.6-.9V4a1 1 0 0 1 1-1Z"/></svg>',
+];
+ 
+$TIPE_COLOR = [
+  'Theater Show' => 'tipe-pink','Off Air' => 'tipe-lav',
+  'On Air' => 'tipe-mint','Event' => 'tipe-peach',
+  'Meet & Greet' => 'tipe-rose','Lainnya' => 'tipe-gray',
+];
+
+// Heart accent kecil — motif yang sama dipakai di ikon navbar, dipakai
+// lagi di sini supaya ikon kalender & info di modal terasa satu keluarga
+// visual dengan navbar, bukan kebetulan mirip doang.
+$heart = '<path d="M20.84 3.61a5.5 5.5 0 0 0-7.78 0L12 4.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
+
+// Ikon generik buat detail modal (Tanggal/Waktu/Lokasi/Tipe Acara) dan
+// label "Info Tambahan" — kalender di sini SENGAJA reuse desain persis
+// dari nav.php, jadi user yang udah lihat ikon kalender di navbar bakal
+// langsung kenal ikon yang sama di sini.
+$ICO_CALENDAR = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" opacity=".28"/><rect x="3" y="5" width="18" height="6.2" rx="3" opacity="1"/><circle cx="8" cy="4" r="1.3" opacity=".55"/><circle cx="16" cy="4" r="1.3" opacity=".55"/><g transform="translate(8.3,12.6) scale(.3)">'.$heart.'</g></svg>';
+$ICO_CLOCK    = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9" opacity=".25"/><path d="M12 6.5a1 1 0 0 1 1 1V12l3.2 1.9a1 1 0 1 1-1 1.7L11.3 13a1.3 1.3 0 0 1-.6-1.1V7.5a1 1 0 0 1 1-1Z"/></svg>';
+$ICO_PIN      = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c-4.1 0-7.5 3.2-7.5 7.5C4.5 15 12 22 12 22s7.5-7 7.5-12.5C19.5 5.2 16.1 2 12 2Z"/><circle cx="12" cy="9.3" r="2.6" opacity=".35"/></svg>';
+$ICO_TAG      = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 3.5h6A1.5 1.5 0 0 1 19 5v6l-8.3 8.3a1.5 1.5 0 0 1-2.1 0l-5.9-5.9a1.5 1.5 0 0 1 0-2.1L11.5 3.5Z"/><circle cx="15" cy="8" r="1.6" opacity=".4"/></svg>';
+$ICO_INFO     = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5.5" width="14" height="17" rx="2" opacity=".32"/><rect x="4" y="3.5" width="14" height="17" rx="2" opacity="1"/><rect x="7" y="9" width="8" height="1.7" rx=".85" opacity=".4"/><rect x="7" y="13" width="6" height="1.7" rx=".85" opacity=".4"/><g transform="translate(12.6,4.6) scale(.22)">'.$heart.'</g></svg>';
+
+/**
+ * Hapus emoji/simbol dekoratif dari teks — terutama nama jadwal.
+ * 
+ * Safety net di level kode: nama jadwal datang dari database (ditulis admin
+ * lewat panel), bukan dari markup ini. Nggak peduli berapa sering emoji nempel
+ * di nama jadwal pas nulis, publik nggak akan pernah lihat itu tampil — fungsi
+ * ini yang nyaring di titik render, sekali untuk semua.
+ */
+function bersihkan_emoji(string $teks): string {
+  $pattern = '/[\x{1F1E0}-\x{1F1FF}\x{1F300}-\x{1F5FF}\x{1F600}-\x{1F64F}'
+           . '\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F780}-\x{1F7FF}'
+           . '\x{1F800}-\x{1F8FF}\x{1F900}-\x{1F9FF}\x{1FA00}-\x{1FA6F}'
+           . '\x{1FA70}-\x{1FAFF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}'
+           . '\x{2B00}-\x{2BFF}\x{2190}-\x{21FF}\x{2300}-\x{23FF}'
+           . '\x{25A0}-\x{25FF}\x{FE0F}\x{200D}]/u';
+  $teks = preg_replace($pattern, '', $teks);
+  return trim(preg_replace('/\s+/', ' ', $teks));
+}
+
+/**
+ * Bersihkan emoji tapi preserve newline untuk deskripsi/konten multi-paragraph
+ */
+function bersihkan_emoji_preserve_newlines(string $teks): string {
+  $pattern = '/[\x{1F1E0}-\x{1F1FF}\x{1F300}-\x{1F5FF}\x{1F600}-\x{1F64F}'
+           . '\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F780}-\x{1F7FF}'
+           . '\x{1F800}-\x{1F8FF}\x{1F900}-\x{1F9FF}\x{1FA00}-\x{1FA6F}'
+           . '\x{1FA70}-\x{1FAFF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}'
+           . '\x{2B00}-\x{2BFF}\x{2190}-\x{21FF}\x{2300}-\x{23FF}'
+           . '\x{25A0}-\x{25FF}\x{FE0F}\x{200D}]/u';
+  $teks = preg_replace($pattern, '', $teks);
+  // Preserve newlines (including blank lines untuk paragraph breaks)
+  $lines = explode("\n", $teks);
+  $lines = array_map(function($line) {
+    return trim(preg_replace('/\s+/', ' ', $line));
+  }, $lines);
+  // Jangan filter empty lines — itu adalah paragraph breaks yang penting
+  return implode("\n", $lines);
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -19,25 +105,39 @@
 
 <!-- HERO -->
 <div class="jadwal-hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
   <div class="jadwal-hero-content">
-    <div class="hero-badge">✦ JKT48 Schedule</div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span> JKT48 Schedule</div>
     <h1>Jadwal <em>Event</em></h1>
     <p>Pantau semua jadwal acara JKT48 — theater show, off air, on air, dan event spesial.</p>
   </div>
-  <div class="jadwal-hero-deco">📅✨🎤💖</div>
 </div>
 
-<!-- FILTER TIPE -->
+<!-- MONTH NAVIGATOR + FILTER -->
 <div class="jadwal-controls">
+
+  <!-- Navigasi bulan -->
+  <div class="month-nav">
+    <button class="month-nav-btn" id="btnPrev" onclick="changeMonth(-1)">
+      ‹
+    </button>
+    <div class="month-nav-label" id="monthLabel">—</div>
+    <button class="month-nav-btn" id="btnNext" onclick="changeMonth(1)">
+      ›
+    </button>
+  </div>
+
+  <!-- Filter tipe — POIN 1: loop dari $TIPE_ICON, ikon SVG bukan emoji -->
   <div class="filter-pills">
     <button class="filter-pill active" data-tipe="all" onclick="setTipeFilter(this)">Semua</button>
-    <button class="filter-pill" data-tipe="Theater Show"  onclick="setTipeFilter(this)">🎭 Theater Show</button>
-    <button class="filter-pill" data-tipe="Off Air"       onclick="setTipeFilter(this)">🎪 Off Air</button>
-    <button class="filter-pill" data-tipe="On Air"        onclick="setTipeFilter(this)">📡 On Air</button>
-    <button class="filter-pill" data-tipe="Event"         onclick="setTipeFilter(this)">🎉 Event</button>
-    <button class="filter-pill" data-tipe="Meet & Greet"  onclick="setTipeFilter(this)">🤝 Meet &amp; Greet</button>
-    <button class="filter-pill" data-tipe="Lainnya"       onclick="setTipeFilter(this)">📌 Lainnya</button>
+    <?php foreach ($TIPE_ICON as $tipeName => $svg): ?>
+    <button class="filter-pill" data-tipe="<?= htmlspecialchars($tipeName) ?>" onclick="setTipeFilter(this)">
+      <span class="filter-pill-icon"><?= $svg ?></span><?= htmlspecialchars($tipeName) ?>
+    </button>
+    <?php endforeach; ?>
   </div>
+
 </div>
 
 <!-- JADWAL LIST -->
@@ -52,111 +152,108 @@
   <?php else: ?>
 
     <?php
-    $BULAN_ID = [
-      '01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April',
-      '05'=>'Mei','06'=>'Juni','07'=>'Juli','08'=>'Agustus',
-      '09'=>'September','10'=>'Oktober','11'=>'November','12'=>'Desember'
-    ];
-
-    $TIPE_ICON = [
-      'Theater Show' => '🎭',
-      'Off Air'      => '🎪',
-      'On Air'       => '📡',
-      'Event'        => '🎉',
-      'Meet & Greet' => '🤝',
-      'Lainnya'      => '📌',
-    ];
-
-    $TIPE_COLOR = [
-      'Theater Show' => 'tipe-pink',
-      'Off Air'      => 'tipe-lav',
-      'On Air'       => 'tipe-mint',
-      'Event'        => 'tipe-peach',
-      'Meet & Greet' => 'tipe-rose',
-      'Lainnya'      => 'tipe-gray',
-    ];
-
-    foreach ($grouped as $monthKey => $items):
-      [$tahun, $bulan] = explode('-', $monthKey);
-      $now = new DateTime();
-      $monthDt = new DateTime($monthKey . '-01');
-      $isPastMonth = $monthDt < new DateTime(date('Y-m') . '-01');
+    // Kumpulkan semua monthKey yang ada
+    $allMonths = array_keys($grouped);
     ?>
 
-    <div class="jadwal-month-group" data-month="<?= $monthKey ?>">
-      <!-- Header bulan -->
-      <div class="month-header <?= $isPastMonth ? 'past' : '' ?>">
-        <div class="month-date-block">
-          <span class="month-name"><?= $BULAN_ID[$bulan] ?? $bulan ?></span>
-          <span class="month-year"><?= $tahun ?></span>
-        </div>
-        <?php if ($isPastMonth): ?>
-          <span class="month-past-badge">Sudah Berlalu</span>
-        <?php endif; ?>
-      </div>
+    <!-- Data bulan sebagai JSON untuk JS — SATU-SATUNYA deklarasi.
+         BUG FIX: sebelumnya ada deklarasi const ALL_MONTHS KEDUA di
+         dekat bawah file (sebelum <script src="jadwal.js">), yang
+         nge-throw SyntaxError "Identifier sudah dideklarasi" tiap kali
+         halaman dibuka. Root cause bug "default bulan kosong" sebenarnya
+         beda (lihat jadwal.js), tapi deklarasi ganda ini tetap dead code
+         yang harus dibuang. -->
+    <script>
+      const ALL_MONTHS = <?= json_encode($allMonths) ?>;
+    </script>
 
-      <!-- Items bulan ini -->
-      <div class="jadwal-list">
-        <?php foreach ($items as $j):
-          $dt      = new DateTime($j['tanggal_jadwal']);
-          $isPast  = $dt < new DateTime();
-          $icon    = $TIPE_ICON[$j['tipe'] ?? 'Lainnya'] ?? '📌';
-          $color   = $TIPE_COLOR[$j['tipe'] ?? 'Lainnya'] ?? 'tipe-gray';
-        ?>
-        <div class="jadwal-row <?= $isPast ? 'is-past' : '' ?>"
-             data-tipe="<?= htmlspecialchars($j['tipe'] ?? 'Lainnya') ?>"
-             onclick="openModal(<?= htmlspecialchars(json_encode($j), ENT_QUOTES) ?>)">
+    <!-- Semua month group, JS yang atur mana yang visible -->
+    <div id="jadwalContainer">
 
-          <!-- Tanggal -->
-          <div class="jrow-date">
-            <div class="jrow-day"><?= $dt->format('d') ?></div>
-            <div class="jrow-dow"><?= ['Min','Sen','Sel','Rab','Kam','Jum','Sab'][$dt->format('w')] ?></div>
-          </div>
+      <?php foreach ($grouped as $monthKey => $items):
+        [$tahun, $bulan] = explode('-', $monthKey);
+        $monthDt = new DateTime($monthKey . '-01');
+        $isPastMonth = $monthDt < new DateTime(date('Y-m') . '-01');
+      ?>
 
-          <!-- Garis tengah -->
-          <div class="jrow-line">
-            <div class="jrow-dot <?= $isPast ? 'dot-past' : 'dot-active' ?>"></div>
-          </div>
+      <div class="jadwal-month-group" data-month="<?= $monthKey ?>" style="display:none;">
 
-          <!-- Info -->
-          <div class="jrow-body">
-            <div class="jrow-top">
-              <span class="jrow-tipe-badge <?= $color ?>">
-                <?= $icon ?> <?= htmlspecialchars($j['tipe'] ?? 'Lainnya') ?>
-              </span>
-              <?php if ($isPast): ?>
-                <span class="jrow-selesai">Selesai</span>
-              <?php else: ?>
-                <span class="jrow-upcoming">Upcoming</span>
-              <?php endif; ?>
+        <!-- Items bulan ini -->
+        <div class="jadwal-list">
+          <?php foreach ($items as $j):
+            $dt     = new DateTime($j['tanggal_jadwal']);
+            $isPast = $dt < new DateTime();
+            $icon   = $TIPE_ICON[$j['tipe'] ?? 'Lainnya'] ?? $TIPE_ICON['Lainnya'];
+            $color  = $TIPE_COLOR[$j['tipe'] ?? 'Lainnya'] ?? 'tipe-gray';
+          ?>
+          <div class="jadwal-row <?= $isPast ? 'is-past' : '' ?>"
+               data-tipe="<?= htmlspecialchars($j['tipe'] ?? 'Lainnya') ?>"
+               onclick="openModal(<?= htmlspecialchars(json_encode(array_merge($j, ['nama_acara' => bersihkan_emoji($j['nama_acara']), 'lokasi' => bersihkan_emoji($j['lokasi'] ?? ''), 'deskripsi' => bersihkan_emoji_preserve_newlines($j['deskripsi'] ?? '')]), ENT_QUOTES)); ?>)">
+
+            <!-- Tanggal -->
+            <div class="jrow-date">
+              <div class="jrow-day"><?= $dt->format('d') ?></div>
+              <div class="jrow-dow"><?= ['Min','Sen','Sel','Rab','Kam','Jum','Sab'][$dt->format('w')] ?></div>
             </div>
-            <div class="jrow-nama"><?= htmlspecialchars($j['nama_acara']) ?></div>
-            <div class="jrow-meta">
-              <span>🕐 <?= $dt->format('H:i') ?> WIB
-                <?php if ($j['waktu_jadwal']): ?>
-                  – <?= substr($j['waktu_jadwal'], 0, 5) ?> WIB
+
+            <!-- Garis tengah -->
+            <div class="jrow-line">
+              <div class="jrow-dot <?= $isPast ? 'dot-past' : 'dot-active' ?>"></div>
+            </div>
+
+            <!-- Info -->
+            <div class="jrow-body">
+              <div class="jrow-top">
+                <span class="jrow-tipe-badge <?= $color ?>">
+                  <span class="jrow-tipe-icon"><?= $icon ?></span><?= htmlspecialchars($j['tipe'] ?? 'Lainnya') ?>
+                </span>
+                <?php if ($isPast): ?>
+                  <span class="jrow-selesai">Selesai</span>
+                <?php else: ?>
+                  <span class="jrow-upcoming">Upcoming</span>
                 <?php endif; ?>
-              </span>
-              <span class="jrow-sep">·</span>
-              <span>📍 <?= htmlspecialchars($j['lokasi']) ?></span>
+              </div>
+              <div class="jrow-nama"><?= htmlspecialchars($j['nama_acara']) ?></div>
+              <div class="jrow-meta">
+                <span class="jrow-meta-group">
+                  <span class="jrow-meta-icon"><?= $ICO_CLOCK ?></span>
+                  <?= $dt->format('H:i') ?> WIB
+                  <?php if ($j['waktu_jadwal']): ?>
+                    – <?= substr($j['waktu_jadwal'], 0, 5) ?> WIB
+                  <?php endif; ?>
+                </span>
+                <span class="jrow-sep">·</span>
+                <span class="jrow-meta-group">
+                  <span class="jrow-meta-icon"><?= $ICO_PIN ?></span>
+                  <?= htmlspecialchars($j['lokasi']) ?>
+                </span>
+              </div>
             </div>
+
+            <!-- Arrow -->
+            <div class="jrow-arrow">→</div>
           </div>
-
-          <!-- Arrow -->
-          <div class="jrow-arrow">→</div>
+          <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
       </div>
-    </div>
 
-    <?php endforeach; ?>
+      <?php endforeach; ?>
 
-    <!-- No result filter -->
-    <div class="jadwal-no-result" id="noResult" style="display:none;">
-      <div class="jadwal-empty-icon">🔍</div>
-      <h3>Tidak Ada Jadwal</h3>
-      <p>Tidak ada jadwal dengan tipe ini.</p>
-    </div>
+      <!-- No result filter -->
+      <div class="jadwal-no-result" id="noResult" style="display:none;">
+        <div class="jadwal-empty-icon">🔍</div>
+        <h3>Tidak Ada Jadwal</h3>
+        <p>Tidak ada jadwal dengan tipe ini.</p>
+      </div>
+
+      <!-- No jadwal bulan ini -->
+      <div class="jadwal-empty" id="noMonth" style="display:none;">
+        <div class="jadwal-empty-icon">📭</div>
+        <h3>Belum Ada Jadwal</h3>
+        <p>Belum ada jadwal untuk bulan ini.</p>
+      </div>
+
+    </div><!-- end #jadwalContainer -->
 
   <?php endif; ?>
 </section>
@@ -176,59 +273,51 @@
 
     <!-- KANAN: Semua info -->
     <div class="jmodal-info-side">
-
-      <!-- Header -->
       <div class="jmodal-header">
         <div class="jmodal-tipe-badge" id="jmodalTipe"></div>
         <h2 class="jmodal-title" id="jmodalTitle"></h2>
       </div>
-
       <div class="jmodal-divider"></div>
-
-      <!-- Detail grid -->
       <div class="jmodal-details">
         <div class="jdetail-item">
-          <div class="jdetail-icon">📅</div>
+          <div class="jdetail-icon"><?= $ICO_CALENDAR ?></div>
           <div>
             <div class="jdetail-label">Tanggal</div>
             <div class="jdetail-val" id="jmodalTanggal"></div>
           </div>
         </div>
         <div class="jdetail-item">
-          <div class="jdetail-icon">🕐</div>
+          <div class="jdetail-icon"><?= $ICO_CLOCK ?></div>
           <div>
             <div class="jdetail-label">Waktu</div>
             <div class="jdetail-val" id="jmodalWaktu"></div>
           </div>
         </div>
         <div class="jdetail-item">
-          <div class="jdetail-icon">📍</div>
+          <div class="jdetail-icon"><?= $ICO_PIN ?></div>
           <div>
             <div class="jdetail-label">Lokasi</div>
             <div class="jdetail-val" id="jmodalLokasi"></div>
           </div>
         </div>
         <div class="jdetail-item">
-          <div class="jdetail-icon">🎭</div>
+          <div class="jdetail-icon"><?= $ICO_TAG ?></div>
           <div>
             <div class="jdetail-label">Tipe Acara</div>
             <div class="jdetail-val" id="jmodalTipeVal"></div>
           </div>
         </div>
       </div>
-
-      <!-- Deskripsi -->
       <div class="jmodal-desc-wrap" id="jmodalDescWrap" style="display:none;">
-        <div class="jmodal-desc-title">📋 Info Tambahan</div>
+        <div class="jmodal-desc-title">
+          <span class="jdesc-title-icon"><?= $ICO_INFO ?></span> Info Tambahan
+        </div>
         <p class="jmodal-desc" id="jmodalDesc"></p>
       </div>
-
-      <!-- Footer -->
       <div class="jmodal-footer">
         <button class="jmodal-close-btn" onclick="closeModal()">Tutup</button>
       </div>
-
-    </div><!-- end .jmodal-info-side -->
+    </div>
   </div>
 </div>
 
@@ -238,105 +327,10 @@
 </footer>
 
 <script src="public/js/home.js"></script>
-<script>
-const HARI = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-const BULAN = ['Januari','Februari','Maret','April','Mei','Juni',
-               'Juli','Agustus','September','Oktober','November','Desember'];
-const TIPE_ICON = {
-  'Theater Show':'🎭','Off Air':'🎪','On Air':'📡',
-  'Event':'🎉','Meet & Greet':'🤝','Lainnya':'📌'
-};
 
-function openModal(j) {
-  const fotoWrap = document.getElementById('jmodalFotoWrap');
-  const fotoImg  = document.getElementById('jmodalFoto');
-  const modal    = document.getElementById('jadwalModal');
-
-  if (j.foto) {
-    fotoImg.src = j.foto;
-    fotoImg.alt = j.nama_acara;
-    fotoWrap.classList.remove('no-foto');
-    modal.classList.remove('no-foto');
-    document.getElementById('jmodalTipeOver').textContent =
-      (TIPE_ICON[j.tipe] || '📌') + ' ' + (j.tipe || 'Lainnya');
-  } else {
-    // Tidak ada foto — sembunyikan kolom kiri
-    fotoWrap.classList.add('no-foto');
-    modal.classList.add('no-foto');
-  }
-
-  // Judul & tipe
-  document.getElementById('jmodalTitle').textContent = j.nama_acara;
-  document.getElementById('jmodalTipe').textContent  =
-    (TIPE_ICON[j.tipe] || '📌') + ' ' + (j.tipe || 'Lainnya');
-  document.getElementById('jmodalTipeVal').textContent = j.tipe || 'Lainnya';
-
-  // Tanggal
-  const dt   = new Date(j.tanggal_jadwal);
-  const tgl  = HARI[dt.getDay()] + ', ' + dt.getDate() + ' ' +
-               BULAN[dt.getMonth()] + ' ' + dt.getFullYear();
-  document.getElementById('jmodalTanggal').textContent = tgl;
-
-  // Waktu
-  const jamMulai = dt.toTimeString().slice(0, 5) + ' WIB';
-  const jamSelesai = j.waktu_jadwal
-    ? ' – ' + j.waktu_jadwal.slice(0, 5) + ' WIB'
-    : '';
-  document.getElementById('jmodalWaktu').textContent = jamMulai + jamSelesai;
-
-  // Lokasi
-  document.getElementById('jmodalLokasi').textContent = j.lokasi;
-
-  // Deskripsi
-  const descWrap = document.getElementById('jmodalDescWrap');
-  if (j.deskripsi && j.deskripsi.trim()) {
-    document.getElementById('jmodalDesc').innerHTML = j.deskripsi.replace(/\n/g, '<br>');
-    descWrap.style.display = 'block';
-  } else {
-    descWrap.style.display = 'none';
-  }
-
-  document.getElementById('modalBackdrop').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.querySelector('.jadwal-modal').scrollTop = 0;
-}
-
-function closeModal() {
-  document.getElementById('modalBackdrop').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// Filter tipe
-let activeTipe = 'all';
-
-function setTipeFilter(btn) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  activeTipe = btn.dataset.tipe;
-  applyFilter();
-}
-
-function applyFilter() {
-  const rows   = document.querySelectorAll('.jadwal-row');
-  const groups = document.querySelectorAll('.jadwal-month-group');
-  let totalVisible = 0;
-
-  groups.forEach(group => {
-    let groupVisible = 0;
-    group.querySelectorAll('.jadwal-row').forEach(row => {
-      const show = activeTipe === 'all' || row.dataset.tipe === activeTipe;
-      row.style.display = show ? '' : 'none';
-      if (show) groupVisible++;
-    });
-    // Sembunyikan group kalau semua itemnya hidden
-    group.style.display = groupVisible > 0 ? '' : 'none';
-    totalVisible += groupVisible;
-  });
-
-  document.getElementById('noResult').style.display = totalVisible === 0 ? 'block' : 'none';
-}
-</script>
+<!-- Logic jadwal — file terpisah. ALL_MONTHS sudah dideklarasi di atas
+     (di dalam blok #jadwalContainer), tidak perlu dideklarasi ulang
+     di sini — itu sumber SyntaxError yang sudah dibuang. -->
+<script src="public/js/jadwal.js"></script>
 </body>
 </html>

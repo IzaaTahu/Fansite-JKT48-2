@@ -1,0 +1,460 @@
+/* register.css — Two-Column Layout + Animations (JKT48 Fansite) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Keyframes ───────────────────────────── */
+@keyframes ringSpinSlow {
+  to { transform: rotate(360deg); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes floatBlob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-12px) scale(1.04); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes strengthGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── Base ────────────────────────────────── */
+body {
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8d7e3;
+  background-image:
+    radial-gradient(ellipse 480px 420px at -5% -5%, rgba(240,100,170,.75) 0%, transparent 60%),
+    radial-gradient(ellipse 420px 380px at 105% -5%, rgba(210,100,200,.65) 0%, transparent 60%),
+    radial-gradient(ellipse 440px 400px at -5% 105%, rgba(255,150,200,.7) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 360px at 105% 105%, rgba(200,130,220,.65) 0%, transparent 60%),
+    radial-gradient(ellipse 280px 220px at 50% -2%, rgba(255,160,210,.5) 0%, transparent 60%),
+    radial-gradient(ellipse 220px 280px at -2% 50%, rgba(255,140,195,.5) 0%, transparent 60%),
+    radial-gradient(ellipse 220px 280px at 102% 50%, rgba(210,120,215,.5) 0%, transparent 60%),
+    radial-gradient(ellipse 280px 220px at 50% 102%, rgba(240,160,220,.5) 0%, transparent 60%);
+  padding: 24px;
+}
+
+/* ── Wrapper ─────────────────────────────── */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 980px;
+  min-height: 580px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 64px rgba(233, 30, 140, 0.22);
+  animation: fadeIn .5s ease both;
+}
+
+/* ── LEFT PANEL ──────────────────────────── */
+.left-panel {
+  flex: 1.15;
+  background: linear-gradient(145deg, #f3e5f5 0%, #ab47bc 55%, #6a1b9a 100%);
+  padding: 44px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-panel::before,
+.left-panel::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+.left-panel::before {
+  width: 280px; height: 280px;
+  top: -90px; right: -90px;
+  animation: floatBlob 7s ease-in-out infinite;
+}
+.left-panel::after {
+  width: 200px; height: 200px;
+  bottom: -70px; left: -70px;
+  animation: floatBlob 9s ease-in-out infinite reverse;
+}
+
+.left-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  animation: fadeUp .6s .1s ease both;
+}
+
+/* ── Logo ────────────────────────────────── */
+.left-logo-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+}
+
+.left-logo-inner {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,.15) 100%);
+  border: 1.5px solid rgba(255,255,255,.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,.4);
+}
+
+.nav-logo-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: rgba(255, 255, 255, .75);
+  border-right-color: rgba(255, 255, 255, .35);
+  animation: ringSpinSlow 4s linear infinite;
+}
+
+/* ── Left text ───────────────────────────── */
+.left-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+}
+
+.left-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  opacity: .92;
+  margin-bottom: 30px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Feature grid ────────────────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 14px 6px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  cursor: default;
+  opacity: 0;
+  animation: fadeUp .45s ease both;
+  animation-delay: calc(.35s + var(--i, 0) * .07s);
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, .28);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+.feature-icon {
+  font-size: 24px;
+  line-height: 1;
+  transition: transform .2s;
+}
+.feature-card:hover .feature-icon {
+  transform: scale(1.18);
+}
+
+.feature-card span {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ── RIGHT PANEL ─────────────────────────── */
+.right-panel {
+  flex: 0.85;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 40px;
+  animation: slideInRight .55s .15s ease both;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 320px;
+}
+
+.card-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #4a2040;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.sub-text {
+  text-align: center;
+  font-size: 13px;
+  color: #9e9e9e;
+  margin-bottom: 24px;
+}
+.sub-text a {
+  color: #9c27b0;
+  font-weight: 700;
+  text-decoration: none;
+}
+.sub-text a:hover { text-decoration: underline; }
+
+/* ── Form ────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7b3f6e;
+}
+
+.form-control {
+  padding: 11px 14px;
+  border: 1.5px solid #f8bbd0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  color: #4a2040;
+  background: #fff;
+  outline: none;
+  transition: border .2s, box-shadow .2s, transform .15s;
+}
+.form-control:focus {
+  border-color: #9c27b0;
+  box-shadow: 0 0 0 3px rgba(156, 39, 176, .12);
+  transform: translateY(-1px);
+}
+.form-control::placeholder { color: #c9aec0; }
+
+/* ── Password wrap & toggle ──────────────── */
+.input-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-password-wrap .form-control {
+  width: 100%;
+  padding-right: 42px;
+}
+
+.toggle-pw {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #c9aec0;
+  display: flex;
+  align-items: center;
+  transition: color .2s, transform .15s;
+}
+.toggle-pw:hover {
+  color: #9c27b0;
+  transform: scale(1.1);
+}
+
+.eye-icon { width: 18px; height: 18px; }
+.hidden { display: none; }
+
+/* ── Password strength ───────────────────── */
+.pw-strength-wrap {
+  height: 4px;
+  background: #f8bbd0;
+  border-radius: 99px;
+  margin-top: 8px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .25s;
+}
+
+.pw-strength-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 99px;
+  transition: width .35s ease, background .35s ease;
+  transform-origin: left;
+}
+
+.pw-strength-label {
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 4px;
+  display: block;
+  min-height: 16px;
+  transition: color .3s;
+}
+
+/* ── Button ──────────────────────────────── */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #9c27b0 0%, #6a1b9a 40%, #9c27b0 80%, #6a1b9a 100%);
+  background-size: 200% auto;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: transform .15s, box-shadow .2s;
+}
+.btn:hover {
+  animation: shimmer 1.4s linear infinite;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(156, 39, 176, .35);
+}
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.btn-loading {
+  opacity: .75;
+  cursor: not-allowed;
+  animation: none !important;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #f8bbd0;
+  margin: 22px 0;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  color: #b06898;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .2s, letter-spacing .2s;
+}
+.back-link:hover {
+  color: #9c27b0;
+  letter-spacing: .3px;
+}
+
+/* ── Alerts ──────────────────────────────── */
+.alert-danger {
+  background: #ffebee; color: #e53935;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  margin-bottom: 16px;
+  animation: fadeUp .3s ease both;
+}
+
+/* ── Reduced motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 720px) {
+  body { padding: 0; align-items: flex-start; }
+  .login-wrapper {
+    flex-direction: column;
+    border-radius: 0;
+    min-height: 100vh;
+    max-width: 100%;
+    box-shadow: none;
+  }
+  .left-panel { padding: 36px 20px; }
+  .right-panel { padding: 36px 24px 48px; flex: none; }
+  .form-wrapper { max-width: 100%; }
+}
+
+@media (max-width: 420px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Bokeh background overlay ────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle 42px at 4%  8%,  rgba(255,255,255,.75) 0%, transparent 100%),
+    radial-gradient(circle 28px at 94% 6%,  rgba(255,255,255,.65) 0%, transparent 100%),
+    radial-gradient(circle 36px at 6%  92%, rgba(255,255,255,.65) 0%, transparent 100%),
+    radial-gradient(circle 50px at 96% 94%, rgba(255,255,255,.7)  0%, transparent 100%),
+    radial-gradient(circle 22px at 2%  45%, rgba(255,220,240,.8)  0%, transparent 100%),
+    radial-gradient(circle 18px at 97% 40%, rgba(240,200,255,.75) 0%, transparent 100%),
+    radial-gradient(circle 26px at 30% 2%,  rgba(255,210,235,.7)  0%, transparent 100%),
+    radial-gradient(circle 20px at 72% 98%, rgba(255,200,230,.7)  0%, transparent 100%),
+    radial-gradient(circle 16px at 88% 2%,  rgba(255,255,255,.6)  0%, transparent 100%),
+    radial-gradient(circle 14px at 12% 97%, rgba(255,255,255,.6)  0%, transparent 100%);
+}
+
+.login-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* sparkle dots */
+.sparkle {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  pointer-events: none;
+  z-index: 0;
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: .2; transform: scale(.6); }
+  50%       { opacity: 1;  transform: scale(1.3); }
+}
