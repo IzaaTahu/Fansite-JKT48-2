@@ -1,16 +1,5 @@
 /* ==============================
    MEMBER PAGE — member.css
-   Idol Energy × Pastel Elegance
-   ==============================
-   REVISI:
-   - ::before bintang-bintang (✦ ✦ ✦...) di panel foto modal dihapus
-     — bukan border literal tapi hasilnya sama: garis putus-putus
-     dekoratif yang mengisi ruang tanpa fungsi.
-   - Flex + gap ditambah ke .card-asal dan .modal-stat supaya SVG icon
-     bisa sejajar rapi dengan teks (sebelumnya pakai emoji yang otomatis
-     inline, sekarang pakai SVG yang butuh flex).
-   - .modal-photo-side::before dihapus (itu yang dimaksud "dotted frame").
-   - TIDAK ADA perubahan @keyframes, animation:, atau transition:.
    ============================== */
 
 :root {
@@ -36,7 +25,6 @@
   position: relative; overflow: hidden;
   border-bottom: 2px solid var(--pk-mid);
 }
-
 .hero-orb {
   position: absolute; border-radius: 50%;
   pointer-events: none; filter: blur(40px);
@@ -89,24 +77,17 @@
   50%       { opacity: .5; transform: scale(.7); }
 }
 
+/* H1 — Cormorant, no italic, no underline animation */
 .member-hero-content h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 46px; line-height: 1.15; color: var(--text-dark); margin-bottom: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 700;
+  line-height: 1.05; color: var(--text-dark);
+  margin-bottom: 12px; letter-spacing: -1px;
   animation: heroFadeUp .7s ease both;
 }
-.member-hero-content h1 em {
-  font-style: italic; color: var(--pk-main); position: relative;
+.member-hero-content h1 .hero-h1-accent {
+  color: inherit; font-style: normal;
 }
-.member-hero-content h1 em::after {
-  content: '';
-  position: absolute; bottom: 2px; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--pk-main), var(--lav-main));
-  border-radius: 2px;
-  transform: scaleX(0); transform-origin: left;
-  animation: underlineReveal 1s .5s ease forwards;
-}
-@keyframes underlineReveal { to { transform: scaleX(1); } }
-
 .member-hero-content p {
   font-size: 15px; color: var(--text-mid);
   animation: heroFadeUp .7s .15s ease both;
@@ -128,7 +109,7 @@
   backdrop-filter: blur(8px); border: 1px solid rgba(233,30,140,.15);
 }
 .hero-stat-num {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 26px; font-weight: 700; color: var(--pk-main); line-height: 1;
 }
 .hero-stat-label {
@@ -150,8 +131,6 @@
   position: sticky; top: 0; z-index: 100;
   backdrop-filter: blur(12px);
 }
-
-/* Search — icon sekarang SVG, butuh flex buat sejajar */
 .member-search-wrap {
   position: relative; max-width: 440px;
   display: flex; align-items: center;
@@ -163,7 +142,7 @@
   pointer-events: none; z-index: 1;
 }
 .member-search-wrap input {
-  width: 100%; padding: 11px 44px 11px 44px;
+  width: 100%; padding: 11px 44px;
   border-radius: 30px;
   border: 1.5px solid var(--pk-mid);
   font-size: 14px; font-family: 'Nunito', sans-serif; color: var(--text-dark);
@@ -210,10 +189,8 @@
 /* ── MEMBER SECTION ──────────────── */
 .member-section {
   padding: 32px 48px 56px;
-  background: var(--bg-main);
-  min-height: 400px;
+  background: var(--bg-main); min-height: 400px;
 }
-
 .member-toolbar {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 24px;
@@ -233,7 +210,7 @@
   background: white; border-radius: 22px;
   border: 1.5px solid var(--pk-light);
   overflow: hidden; cursor: pointer; position: relative;
-  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease, border-color .2s;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .2s;
   opacity: 0;
   animation: cardEntrance .35s cubic-bezier(.34,1.56,.64,1) both;
   animation-delay: calc(var(--card-index, 0) * 20ms);
@@ -247,7 +224,6 @@
   box-shadow: 0 20px 48px rgba(233,30,140,.2), 0 0 0 1px rgba(233,30,140,.15);
   border-color: var(--pk-main);
 }
-
 .card-shimmer {
   position: absolute; inset: 0; z-index: 5; pointer-events: none;
   background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.45) 50%, transparent 60%);
@@ -256,13 +232,14 @@
 .member-card:hover .card-shimmer {
   transform: translateX(100%); transition: transform .5s ease;
 }
-
 .card-photo-wrap {
   position: relative; overflow: hidden;
   aspect-ratio: 3/4; background: var(--pk-light);
 }
 .card-photo {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: top center;
+  display: block;
   transition: transform .4s cubic-bezier(.25,.8,.25,1);
 }
 .member-card:hover .card-photo { transform: scale(1.08); }
@@ -271,7 +248,6 @@
   display: flex; align-items: center; justify-content: center;
   background: var(--pk-light);
 }
-
 .card-gen-badge {
   position: absolute; top: 10px; left: 10px;
   background: rgba(233,30,140,.88); color: white;
@@ -280,7 +256,6 @@
   transition: transform .2s;
 }
 .member-card:hover .card-gen-badge { transform: scale(1.05); }
-
 .card-hover-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to bottom, transparent 40%, rgba(58,26,48,.85) 100%);
@@ -295,13 +270,11 @@
   transition: transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 .member-card:hover .card-hover-content { transform: translateY(0); }
-/* SVG icon di hover — sama-sama flex seperti ikon navbar */
-.card-hover-icon { display: flex; align-items: center; flex-shrink: 0; }
+.card-hover-icon  { display: flex; align-items: center; flex-shrink: 0; }
 .card-hover-text  { color: white; font-size: 12px; font-weight: 800; letter-spacing: .5px; }
 .card-hover-arrow { color: var(--pk-mid); font-size: 14px; font-weight: 800; transition: transform .2s; }
 .member-card:hover .card-hover-arrow { transform: translateX(3px); }
 
-/* Card info — flex buat icon pin + teks asal */
 .card-info { padding: 12px 14px 14px; position: relative; }
 .card-name {
   font-size: 14px; font-weight: 800; color: var(--text-dark);
@@ -313,7 +286,6 @@
   font-size: 12px; color: var(--text-light); font-weight: 600;
 }
 .card-asal-icon { display: flex; flex-shrink: 0; color: var(--text-light); }
-
 .card-corner-accent {
   position: absolute; bottom: 0; right: 0;
   width: 0; height: 0; border-style: solid;
@@ -326,18 +298,18 @@
 .member-empty, .member-no-result {
   text-align: center; padding: 60px 20px; color: var(--text-light);
 }
-/* Icon sekarang SVG — butuh display:flex buat tengah */
 .member-empty-icon {
   display: flex; justify-content: center;
   color: var(--pk-mid); margin-bottom: 14px;
 }
 .member-empty h3, .member-no-result h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; color: var(--text-dark); margin-bottom: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 700;
+  color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.3px;
 }
 .member-empty p, .member-no-result p { font-size: 14px; line-height: 1.7; }
 
-/* ── MODAL BACKDROP ──────────────── */
+/* ── MODAL ───────────────────────── */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(58,26,48,.6); backdrop-filter: blur(8px);
@@ -346,7 +318,6 @@
 }
 .modal-backdrop.open { opacity: 1; pointer-events: all; }
 
-/* ── MODAL BOX ───────────────────── */
 .modal-box {
   background: white; border-radius: 28px;
   width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto;
@@ -364,20 +335,14 @@
   position: sticky; top: 16px; float: right; margin: 16px 16px 0 0;
   width: 34px; height: 34px; border-radius: 50%;
   background: var(--pk-light); border: none; cursor: pointer;
-  font-size: 18px; color: var(--text-mid);
+  color: var(--text-mid);
   display: flex; align-items: center; justify-content: center;
   transition: background .2s, color .2s, transform .2s; z-index: 10;
 }
 .modal-close:hover { background: var(--pk-main); color: white; transform: rotate(90deg); }
 
-/* ── MODAL INNER ─────────────────── */
 .modal-inner { display: flex; gap: 0; min-height: 380px; clear: both; }
 
-/* Foto side —
-   SEBELUM: ::before berisi '✦ ✦ ✦...' yang secara visual kebaca
-            sebagai "dotted frame" dekoratif di sekitar foto.
-   SESUDAH: ::before dihapus total. Panel foto berdiri sendiri —
-            photo-glow (blur radial) sudah cukup sebagai accent. */
 .modal-photo-side {
   width: 230px; flex-shrink: 0;
   background: linear-gradient(160deg, var(--pk-light) 0%, var(--lav-light) 100%);
@@ -386,7 +351,6 @@
   align-items: center; justify-content: flex-start;
   padding: 32px 20px 24px; gap: 14px;
   position: relative; overflow: hidden;
-  /* ::before yang lama: DIHAPUS */
 }
 .modal-photo-glow {
   position: absolute; width: 160px; height: 160px; border-radius: 50%;
@@ -394,16 +358,18 @@
   top: 60px; left: 50%; transform: translateX(-50%);
   pointer-events: none;
 }
-
 .modal-photo-wrap { width: 166px; position: relative; z-index: 1; }
 .modal-photo {
   width: 166px; height: 220px;
-  object-fit: cover; border-radius: 20px;
+  object-fit: cover; object-position: top center;
+  border-radius: 20px;
   border: 3px solid white;
   box-shadow: 0 12px 32px rgba(233,30,140,.25), 0 0 0 1px rgba(233,30,140,.1);
   display: block; transition: transform .3s ease;
 }
-.modal-backdrop.open .modal-photo { animation: photoReveal .5s .1s cubic-bezier(.34,1.56,.64,1) both; }
+.modal-backdrop.open .modal-photo {
+  animation: photoReveal .5s .1s cubic-bezier(.34,1.56,.64,1) both;
+}
 @keyframes photoReveal {
   from { opacity: 0; transform: scale(.9) translateY(10px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -413,18 +379,14 @@
   background: var(--pk-light); display: flex; align-items: center; justify-content: center;
   border: 3px solid white;
 }
-
 .modal-gen-tag {
   background: rgba(233,30,140,.12); color: var(--pk-main);
   border: 1.5px solid rgba(233,30,140,.25);
   font-size: 11px; font-weight: 800; padding: 5px 16px; border-radius: 20px;
   letter-spacing: .5px; position: relative; z-index: 1;
 }
-
-/* Foto note — sekarang flex untuk SVG kamera + teks */
 .modal-foto-note {
-  display: none;
-  align-items: center; gap: 5px;
+  display: none; align-items: center; gap: 5px;
   font-size: 11px; color: var(--text-light); font-weight: 600;
   background: rgba(255,255,255,.7); border-radius: 10px;
   padding: 4px 12px; backdrop-filter: blur(4px);
@@ -432,7 +394,6 @@
 }
 .modal-foto-note.visible { display: flex; }
 
-/* Info side */
 .modal-info-side {
   flex: 1; padding: 32px 28px 24px;
   display: flex; flex-direction: column; gap: 18px; overflow-y: auto;
@@ -442,28 +403,23 @@
   letter-spacing: 1.5px; color: var(--text-light); margin-bottom: 4px;
 }
 .modal-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px; font-weight: 700; color: var(--text-dark); line-height: 1.2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 700; color: var(--text-dark);
+  line-height: 1.2; letter-spacing: -0.5px;
 }
-
-/* Stats — SVG icon sekarang flex */
 .modal-stats {
   display: flex; flex-direction: column; gap: 8px;
   background: var(--pk-pale); border-radius: 16px; padding: 14px 16px;
   border: 1.5px solid var(--pk-light);
 }
 .modal-stat { display: flex; align-items: center; gap: 10px; }
-.modal-stat-icon {
-  display: flex; align-items: center; flex-shrink: 0;
-  color: var(--pk-main);
-}
+.modal-stat-icon { display: flex; align-items: center; flex-shrink: 0; color: var(--pk-main); }
 .modal-stat-label { font-size: 10px; color: var(--text-light); font-weight: 700; margin-bottom: 2px; text-transform: uppercase; letter-spacing: .5px; }
 .modal-stat-val   { font-size: 14px; color: var(--text-dark); font-weight: 700; }
 
 .modal-desc-wrap { flex: 1; }
 .modal-desc { font-size: 14px; color: var(--text-mid); line-height: 1.8; white-space: pre-line; }
 
-/* Oshimen btn */
 .modal-oshi-btn {
   display: flex; align-items: center; justify-content: center; gap: 7px;
   width: 100%; padding: 13px;
@@ -493,9 +449,8 @@
 
 /* ── RESPONSIVE ──────────────────── */
 @media (max-width: 768px) {
-  .member-hero    { padding: 44px 20px 40px; }
-  .member-hero-content h1 { font-size: 32px; }
-  .member-hero-deco { display: none; }
+  .member-hero    { padding: 80px 20px 40px; }
+  .member-hero-content h1 { font-size: 36px; }
   .member-controls { padding: 16px 20px 0; top: 0; }
   .member-section  { padding: 24px 16px 40px; }
   .member-grid     { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
@@ -516,7 +471,6 @@
   .modal-name        { font-size: 22px; }
   .modal-box         { border-radius: 22px; max-height: 92vh; }
 }
-
 @media (max-width: 480px) {
   .member-grid { grid-template-columns: repeat(2, 1fr); }
 }

@@ -1,6 +1,5 @@
 /* ==============================
    BERITA PAGE — berita.css
-   Idol Energy × Pastel Elegance
    ============================== */
 
 :root {
@@ -67,23 +66,18 @@
   50%       { opacity: .4; transform: scale(.6); }
 }
 
+/* H1 — Cormorant, aksen warna bukan italic */
 .berita-hero-content h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 46px; line-height: 1.15; color: var(--text-dark); margin-bottom: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 700;
+  line-height: 1.05; color: var(--text-dark);
+  margin-bottom: 12px; letter-spacing: -1px;
   animation: heroFadeUp .7s ease both;
 }
-.berita-hero-content h1 em {
-  font-style: italic; color: var(--pk-main); position: relative;
+.hero-h1-accent {
+  color: inherit;
+  font-style: normal;
 }
-.berita-hero-content h1 em::after {
-  content: '';
-  position: absolute; bottom: 2px; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--pk-main), var(--lav-main));
-  border-radius: 2px;
-  transform: scaleX(0); transform-origin: left;
-  animation: underlineReveal 1s .5s ease forwards;
-}
-@keyframes underlineReveal { to { transform: scaleX(1); } }
 
 .berita-hero-content p {
   font-size: 15px; color: var(--text-mid);
@@ -92,16 +86,6 @@
 @keyframes heroFadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-.berita-hero-deco {
-  position: absolute; top: 28px; right: 48px;
-  font-size: 26px; letter-spacing: 6px;
-  animation: heroDeco 3s ease-in-out infinite alternate;
-}
-@keyframes heroDeco {
-  0%   { transform: translateY(0) rotate(-2deg); }
-  100% { transform: translateY(-10px) rotate(2deg); }
 }
 
 /* ── CONTROLS ────────────────────── */
@@ -117,7 +101,9 @@
   display: flex; align-items: center;
 }
 .search-icon {
-  position: absolute; left: 16px; font-size: 15px;
+  position: absolute; left: 16px;
+  display: flex; align-items: center;
+  color: var(--text-light);
   pointer-events: none; z-index: 1;
 }
 .berita-controls input {
@@ -158,9 +144,7 @@
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.author-avatar-sm {
-  width: 22px; height: 22px; font-size: 10px;
-}
+.author-avatar-sm { width: 22px; height: 22px; font-size: 10px; }
 
 /* ── FEATURED POST ───────────────── */
 .berita-featured {
@@ -169,8 +153,7 @@
   overflow: hidden; display: flex;
   cursor: pointer; min-height: 280px;
   box-shadow: 0 8px 32px rgba(233,30,140,.08);
-  transition: transform .3s cubic-bezier(.34,1.56,.64,1),
-              box-shadow .3s ease, border-color .2s;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .2s;
   animation: heroFadeUp .6s ease both;
 }
 .berita-featured:hover {
@@ -179,13 +162,14 @@
   border-color: var(--pk-main);
 }
 
-/* Foto sisi kiri */
 .featured-img-wrap {
   width: 340px; flex-shrink: 0;
   overflow: hidden; position: relative;
 }
 .featured-img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center;
+  display: block;
   transition: transform .5s cubic-bezier(.25,.8,.25,1);
 }
 .berita-featured:hover .featured-img { transform: scale(1.07); }
@@ -193,7 +177,6 @@
   width: 100%; height: 100%;
   background: linear-gradient(135deg, var(--pk-light), var(--lav-light));
   display: flex; align-items: center; justify-content: center;
-  font-size: 64px;
 }
 .featured-img-overlay {
   position: absolute; inset: 0;
@@ -201,13 +184,11 @@
   pointer-events: none;
 }
 
-/* Body sisi kanan */
 .featured-body {
   flex: 1; padding: 36px 36px 32px;
   display: flex; flex-direction: column; gap: 16px;
   position: relative;
 }
-/* Accent line kiri */
 .featured-body::before {
   content: '';
   position: absolute; top: 32px; bottom: 32px; left: 0;
@@ -229,14 +210,12 @@
   background: var(--pk-main);
   animation: badgePulse 1.8s ease-in-out infinite;
 }
-.featured-date {
-  font-size: 12px; color: var(--text-light); font-weight: 600;
-}
+.featured-date { font-size: 12px; color: var(--text-light); font-weight: 600; }
 
 .featured-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 700; color: var(--text-dark);
-  line-height: 1.35;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 700; color: var(--text-dark);
+  line-height: 1.3; letter-spacing: -0.3px;
   transition: color .2s;
 }
 .berita-featured:hover .featured-title { color: var(--pk-main); }
@@ -260,22 +239,21 @@
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 800; color: var(--pk-main);
   background: var(--pk-light); padding: 7px 16px; border-radius: 20px;
-  transition: background .2s, gap .2s;
+  transition: background .2s, gap .2s, color .2s;
 }
 .berita-featured:hover .featured-cta {
   background: var(--pk-main); color: white; gap: 10px;
 }
-.featured-cta-arrow { transition: transform .2s; }
+.featured-cta-arrow { transition: transform .2s; flex-shrink: 0; }
 .berita-featured:hover .featured-cta-arrow { transform: translateX(3px); }
 
 /* ── GRID BERITA LAINNYA ─────────── */
 .berita-grid-wrap { display: flex; flex-direction: column; gap: 16px; }
-.berita-grid-header {
-  display: flex; align-items: center; gap: 16px;
-}
+.berita-grid-header { display: flex; align-items: center; gap: 16px; }
 .berita-grid-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px; color: var(--text-dark); white-space: nowrap;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--text-dark); white-space: nowrap; letter-spacing: -0.3px;
 }
 .berita-grid-line {
   flex: 1; height: 1.5px;
@@ -290,8 +268,7 @@
   border: 1.5px solid var(--pk-light);
   display: flex; align-items: center;
   overflow: hidden; cursor: pointer; position: relative;
-  transition: transform .25s cubic-bezier(.34,1.56,.64,1),
-              box-shadow .25s ease, border-color .2s;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s, border-color .2s;
   opacity: 0;
   animation: cardSlideIn .4s cubic-bezier(.25,.8,.25,1) both;
   animation-delay: calc(var(--card-index, 0) * 60ms);
@@ -306,38 +283,33 @@
   border-color: var(--pk-main);
 }
 
-/* Shimmer */
 .berita-card-shimmer {
   position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.4) 50%, transparent 60%);
-  transform: translateX(-100%); transition: none; border-radius: 18px;
+  transform: translateX(-100%); border-radius: 18px;
 }
 .berita-card:hover .berita-card-shimmer {
   transform: translateX(100%); transition: transform .45s ease;
 }
 
-/* Thumbnail */
 .berita-card-thumb {
-  width: 110px; height: 90px; flex-shrink: 0;
-  overflow: hidden; background: var(--pk-light);
-  position: relative;
+  width: 96px; height: 96px; flex-shrink: 0;
+  overflow: hidden; background: var(--pk-light); position: relative;
 }
 .berita-card-thumb img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: top center;
+  display: block;
   transition: transform .35s ease;
 }
 .berita-card:hover .berita-card-thumb img { transform: scale(1.1); }
 .berita-card-thumb-ph {
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 28px;
   background: linear-gradient(135deg, var(--pk-light), var(--lav-light));
 }
 
-/* Body */
-.berita-card-body {
-  flex: 1; padding: 14px 16px; min-width: 0;
-}
+.berita-card-body { flex: 1; padding: 14px 16px; min-width: 0; }
 .berita-card-title {
   font-size: 15px; font-weight: 700; color: var(--text-dark);
   margin-bottom: 5px; line-height: 1.4;
@@ -356,10 +328,9 @@
 }
 .meta-dot { color: var(--pk-mid); }
 
-/* Arrow */
 .berita-card-arrow {
-  font-size: 18px; color: var(--pk-light);
-  padding: 0 16px; flex-shrink: 0;
+  color: var(--pk-light); padding: 0 16px; flex-shrink: 0;
+  display: flex; align-items: center;
   transition: color .2s, transform .2s;
 }
 .berita-card:hover .berita-card-arrow { color: var(--pk-main); transform: translateX(5px); }
@@ -368,14 +339,15 @@
 .berita-empty, .berita-no-result {
   text-align: center; padding: 60px 20px; color: var(--text-light);
 }
-.berita-empty-icon { font-size: 48px; margin-bottom: 14px; }
+.berita-empty-icon { margin-bottom: 14px; display: flex; justify-content: center; }
 .berita-empty h3, .berita-no-result h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; color: var(--text-dark); margin-bottom: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 700;
+  color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.3px;
 }
 .berita-empty p, .berita-no-result p { font-size: 14px; line-height: 1.7; }
 
-/* ── MODAL BACKDROP ──────────────── */
+/* ── MODAL ───────────────────────── */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(58,26,48,.6); backdrop-filter: blur(8px);
@@ -384,7 +356,6 @@
 }
 .modal-backdrop.open { opacity: 1; pointer-events: all; }
 
-/* ── BERITA MODAL ────────────────── */
 .berita-modal {
   background: white; border-radius: 28px;
   width: 100%; max-width: 900px; max-height: 88vh;
@@ -401,32 +372,26 @@
   position: absolute; top: 14px; right: 14px;
   width: 34px; height: 34px; border-radius: 50%;
   background: rgba(255,255,255,.92); border: none; cursor: pointer;
-  font-size: 18px; color: var(--text-mid);
+  color: var(--text-mid);
   display: flex; align-items: center; justify-content: center;
   transition: background .2s, color .2s, transform .2s; z-index: 20;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
 .modal-close:hover { background: var(--pk-main); color: white; transform: rotate(90deg); }
 
-/* Foto sisi kiri */
 .bmodal-foto-wrap {
   width: 340px; flex-shrink: 0; position: relative;
   overflow: hidden; background: var(--pk-light);
   border-radius: 26px 0 0 26px;
 }
-.bmodal-foto {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
+.bmodal-foto { width: 100%; height: 100%; object-fit: cover; display: block; }
 .bmodal-foto-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to right, transparent 60%, rgba(255,240,247,.2));
   pointer-events: none;
 }
 
-/* Main content */
-.bmodal-main {
-  flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0;
-}
+.bmodal-main { flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 
 .bmodal-header {
   padding: 28px 30px 20px;
@@ -440,9 +405,9 @@
   padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
 }
 .bmodal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 700; color: var(--text-dark);
-  line-height: 1.35; margin-bottom: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 700; color: var(--text-dark);
+  line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.3px;
 }
 .bmodal-meta {
   display: flex; align-items: center; gap: 7px;
@@ -486,25 +451,23 @@
   .bmodal-main { min-height: unset; }
   .bmodal-body { overflow-y: visible; max-height: unset; }
 }
-
 @media (max-width: 768px) {
-  .berita-hero    { padding: 44px 20px 24px; }
-  .berita-hero-content h1 { font-size: 32px; }
-  .berita-hero-deco { display: none; }
+  .berita-hero   { padding: 80px 20px 24px; }
+  .berita-hero-content h1 { font-size: 36px; }
   .berita-controls { padding: 14px 20px; }
   .berita-section  { padding: 24px 16px 40px; gap: 28px; }
 
   .berita-featured { flex-direction: column; }
-  .featured-img-wrap { width: 100%; height: 200px; }
+  .featured-img-wrap { width: 100%; height: 220px; }
   .featured-body  { padding: 22px 20px; }
-  .featured-title { font-size: 20px; }
+  .featured-title { font-size: 22px; }
 
-  .berita-card-thumb { width: 90px; height: 76px; }
+  .berita-card-thumb { width: 80px; height: 100%; min-height: 110px; }
   .berita-card-title { white-space: normal; }
 
   .bmodal-foto-wrap { display: none !important; }
   .bmodal-header  { padding: 20px 20px 16px; }
-  .bmodal-title   { font-size: 19px; }
+  .bmodal-title   { font-size: 20px; }
   .bmodal-body    { padding: 20px; }
   .bmodal-footer  { padding: 12px 20px 20px; }
 }

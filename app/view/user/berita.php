@@ -1,16 +1,7 @@
 <?php
 /**
- * Hapus emoji/simbol dekoratif dari teks — terutama judul berita.
- *
- * Ini bukan fix tampilan, ini safety net di level kode: judul artikel
- * datang dari database (ditulis admin lewat panel posting), bukan dari
- * markup ini. Nggak peduli berapa sering emoji nempel di judul pas
- * nulis berita, publik nggak akan pernah lihat itu tampil — fungsi ini
- * yang nyaring di titik render, sekali untuk semua.
- *
- * Kalau project ini punya file functions.php / helpers.php terpusat,
- * pindahin fungsi ini ke sana supaya bisa dipakai ulang di home.php
- * (latest-section juga nampilin judul dari sumber yang sama).
+ * Strip emoji dari judul berita sebelum render.
+ * Kalau project punya functions.php terpusat, pindahin ke sana.
  */
 function bersihkan_emoji(string $teks): string {
   $pattern = '/[\x{1F1E0}-\x{1F1FF}\x{1F300}-\x{1F5FF}\x{1F600}-\x{1F64F}'
@@ -31,7 +22,7 @@ function bersihkan_emoji(string $teks): string {
   <title>Berita — JKT48 Fansite</title>
   <link rel="stylesheet" href="public/css/home.css"/>
   <link rel="stylesheet" href="public/css/berita.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Cormorant+Garamond:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
@@ -48,22 +39,19 @@ function bersihkan_emoji(string $teks): string {
   <div class="berita-hero-content">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
-      <!-- POIN 1 (lanjutan): sparkle SVG sebelumnya masih kebaca sebagai
-           dekorasi, sama kategorinya dengan unicode ✦ yang udah dibuang.
-           Disederhanakan total — dot pulsing ini fungsional (nandain
-           "live/baru"), bukan ornamen, jadi dipertahankan sendirian. -->
       JKT48 News
     </div>
-    <h1>Berita & <em>Update</em></h1>
+    <h1>Berita &amp; <span class="hero-h1-accent">Update</span></h1>
     <p>Info terbaru seputar JKT48 — konser, rilis single, dan aktivitas member.</p>
   </div>
-  <div class="berita-hero-deco">📰✨💖🎵</div>
 </div>
 
 <!-- SEARCH -->
 <div class="berita-controls">
   <div class="berita-search-wrap">
-    <span class="search-icon">🔍</span>
+    <span class="search-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    </span>
     <input type="text" id="searchInput"
            placeholder="Cari judul berita..."
            oninput="filterBerita()"/>
@@ -75,16 +63,15 @@ function bersihkan_emoji(string $teks): string {
 <section class="berita-section">
   <?php if (empty($posts)): ?>
     <div class="berita-empty">
-      <div class="berita-empty-icon">📭</div>
+      <div class="berita-empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f48fb1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+      </div>
       <h3>Belum Ada Berita</h3>
       <p>Admin belum memposting berita. Cek lagi nanti ya!</p>
     </div>
 
   <?php else:
     $featured = $posts[0];
-    // POIN 1: strip emoji dari judul SEBELUM dipakai di mana pun —
-    // attribute data-title, htmlspecialchars(), maupun json_encode()
-    // buat modal. Satu titik bersih, semua turunan otomatis ikut bersih.
     $featured['judul'] = bersihkan_emoji($featured['judul']);
     $rest = array_slice($posts, 1);
   ?>
@@ -101,7 +88,9 @@ function bersihkan_emoji(string $teks): string {
                alt="<?= htmlspecialchars($featured['judul']) ?>"
                class="featured-img"/>
         <?php else: ?>
-          <div class="featured-img-placeholder">📰</div>
+          <div class="featured-img-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#f48fb1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+          </div>
         <?php endif; ?>
         <div class="featured-img-overlay"></div>
       </div>
@@ -129,7 +118,7 @@ function bersihkan_emoji(string $teks): string {
           </div>
           <div class="featured-cta">
             Baca Selengkapnya
-            <span class="featured-cta-arrow">→</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="featured-cta-arrow"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
         </div>
       </div>
@@ -155,7 +144,9 @@ function bersihkan_emoji(string $teks): string {
                    alt="<?= htmlspecialchars($p['judul']) ?>"
                    loading="lazy"/>
             <?php else: ?>
-              <div class="berita-card-thumb-ph">📄</div>
+              <div class="berita-card-thumb-ph">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f48fb1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
             <?php endif; ?>
           </div>
 
@@ -174,7 +165,9 @@ function bersihkan_emoji(string $teks): string {
             </div>
           </div>
 
-          <div class="berita-card-arrow">→</div>
+          <div class="berita-card-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
           <div class="berita-card-shimmer"></div>
         </div>
         <?php endforeach; ?>
@@ -183,7 +176,9 @@ function bersihkan_emoji(string $teks): string {
     <?php endif; ?>
 
     <div class="berita-no-result" id="noResult" style="display:none;">
-      <div class="berita-empty-icon">🔍</div>
+      <div class="berita-empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f48fb1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
       <h3>Berita Tidak Ditemukan</h3>
       <p>Coba kata kunci yang berbeda.</p>
     </div>
@@ -194,7 +189,9 @@ function bersihkan_emoji(string $teks): string {
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal()">
   <div class="berita-modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModal()">×</button>
+    <button class="modal-close" onclick="closeModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
 
     <div class="bmodal-foto-wrap" id="bmodalFotoWrap" style="display:none;">
       <img id="bmodalFoto" src="" alt="" class="bmodal-foto"/>
@@ -203,7 +200,7 @@ function bersihkan_emoji(string $teks): string {
 
     <div class="bmodal-main">
       <div class="bmodal-header">
-        <div class="bmodal-badge">📰 Berita</div>
+        <div class="bmodal-badge">Berita</div>
         <h2 class="bmodal-title" id="bmodalTitle"></h2>
         <div class="bmodal-meta">
           <div class="author-avatar author-avatar-sm" id="bmodalAuthorAvatar"></div>
@@ -222,7 +219,7 @@ function bersihkan_emoji(string $teks): string {
 </div>
 
 <footer>
-  <p>Fansite JKT48 &copy; 2025 — Dibuat dengan <span class="heart">♥</span> oleh komunitas penggemar.</p>
+  <p>Fansite JKT48 &copy; 2025 — Dibuat dengan <span class="heart">&#9829;</span> oleh komunitas penggemar.</p>
 </footer>
 
 <script src="public/js/home.js"></script>
